@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Be+Vietnam+Pro:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-highest": "#e8e0e8",
+                        "surface-variant": "#e8e0e8",
+                        "secondary-container": "#edd4fe",
+                        "surface-container-high": "#eee6ee",
+                        "primary-container": "#51247a",
+                        "on-primary-fixed-variant": "#5d3186",
+                        "surface-container-lowest": "#ffffff",
+                        "on-tertiary": "#ffffff",
+                        "on-secondary-fixed-variant": "#523f61",
+                        "surface-container-low": "#faf1f9",
+                        "on-surface-variant": "#4b4450",
+                        "on-secondary-fixed": "#251433",
+                        "on-background": "#1e1a20",
+                        "surface-container": "#f4ebf3",
+                        "tertiary-container": "#503700",
+                        "secondary-fixed-dim": "#d6bee7",
+                        "error": "#ba1a1a",
+                        "tertiary-fixed": "#ffdea9",
+                        "outline": "#7d7481",
+                        "inverse-surface": "#332f35",
+                        "tertiary-fixed-dim": "#e8c17e",
+                        "on-error": "#ffffff",
+                        "inverse-on-surface": "#f7eef6",
+                        "surface": "#fff7fd",
+                        "on-primary-fixed": "#2c0050",
+                        "on-primary-container": "#c192ee",
+                        "on-error-container": "#93000a",
+                        "on-secondary": "#ffffff",
+                        "outline-variant": "#cec3d1",
+                        "error-container": "#ffdad6",
+                        "on-tertiary-fixed": "#271900",
+                        "primary-fixed": "#f0dbff",
+                        "on-secondary-container": "#6d597d",
+                        "on-tertiary-container": "#c5a061",
+                        "surface-dim": "#e0d7df",
+                        "secondary": "#6a577a",
+                        "tertiary": "#342300",
+                        "background": "#fff7fd",
+                        "primary-fixed-dim": "#ddb7ff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "lg": "40px",
+                        "xl": "64px",
+                        "md": "24px",
+                        "base": "8px",
+                        "sm": "12px",
+                        "gutter": "16px",
+                        "xs": "4px",
+                        "container-padding": "20px"
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .star-fill {
+            font-variation-settings: 'FILL' 1;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background min-h-screen pb-24">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-white/90 backdrop-blur-md border-b border-purple-100/20 shadow-[0_4px_20px_rgba(81,36,122,0.05)] flex justify-between items-center px-5 h-16 w-full">
+<div class="flex items-center gap-4">
+<button class="flex items-center justify-center w-10 h-10 rounded-full hover:bg-purple-50 transition-colors active:scale-95 duration-200 text-purple-900">
+<span class="material-symbols-outlined" data-icon="arrow_back">arrow_back</span>
+</button>
+<h1 class="font-['Plus_Jakarta_Sans'] font-bold text-lg tracking-tight text-purple-900">Extra Bite</h1>
+</div>
+<div class="w-10 h-10 rounded-full overflow-hidden border-2 border-purple-100">
+<img alt="User profile photo" class="w-full h-full object-cover" data-alt="Professional studio portrait of a smiling person with soft lighting and a neutral grey background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA8xuSkyWS8YkPIIQYb91EyuXV_6B8abWAkqpqWbSNJ5xRk7tOGcnJtl5BK3SffiAIov3v9OxOx4_yw0caElMOgZbUXzA6pPYgg1Fpef4uFgCmqVaYMLlz3mM4pAkAsvvzqYPxTc-3e8eGBeNbL5Zhe4iQMuXcBk2gZ2PY5DEedIZoVTNI-8w7orC0MRB_O-w87jPRf80mt78iikwdTc3JWoHnWLBdHsq7ImasadNC0UM_N0GGqwiHKLdhWpCd2mawnGMk7-pkgNrS-"/>
+</div>
+</header>
+<main class="pt-20 px-container-padding max-w-2xl mx-auto">
+<!-- Summary Header -->
+<section class="mt-base mb-lg">
+<h2 class="font-['Plus_Jakarta_Sans'] text-headline-md text-on-surface mb-md">Ratings &amp; Reviews</h2>
+<div class="bg-surface-container-low rounded-xl p-md flex flex-col md:flex-row gap-xl items-center shadow-[0_4px_24px_rgba(81,36,122,0.04)]">
+<!-- Large Score -->
+<div class="text-center">
+<div class="font-['Plus_Jakarta_Sans'] text-[56px] font-extrabold text-primary leading-none">4.8</div>
+<div class="flex justify-center text-tertiary-fixed-dim my-xs">
+<span class="material-symbols-outlined star-fill" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined star-fill" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined star-fill" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined star-fill" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined star-fill" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+<div class="font-['Be_Vietnam_Pro'] text-label-sm text-on-surface-variant">1,284 reviews</div>
+</div>
+<!-- Distribution Bar Chart -->
+<div class="flex-1 w-full space-y-xs">
+<div class="flex items-center gap-sm">
+<span class="font-['Be_Vietnam_Pro'] text-label-sm w-4">5</span>
+<div class="flex-1 h-2 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-primary w-[82%] rounded-full"></div>
+</div>
+</div>
+<div class="flex items-center gap-sm">
+<span class="font-['Be_Vietnam_Pro'] text-label-sm w-4">4</span>
+<div class="flex-1 h-2 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-primary w-[12%] rounded-full"></div>
+</div>
+</div>
+<div class="flex items-center gap-sm">
+<span class="font-['Be_Vietnam_Pro'] text-label-sm w-4">3</span>
+<div class="flex-1 h-2 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-primary w-[4%] rounded-full"></div>
+</div>
+</div>
+<div class="flex items-center gap-sm">
+<span class="font-['Be_Vietnam_Pro'] text-label-sm w-4">2</span>
+<div class="flex-1 h-2 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-primary w-[1%] rounded-full"></div>
+</div>
+</div>
+<div class="flex items-center gap-sm">
+<span class="font-['Be_Vietnam_Pro'] text-label-sm w-4">1</span>
+<div class="flex-1 h-2 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-primary w-[1%] rounded-full"></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Review List -->
+<div class="space-y-lg">
+<!-- Review 1: Kobe Jackson -->
+<article class="border-b border-surface-container-highest pb-lg">
+<div class="flex items-center gap-sm mb-sm">
+<div class="w-10 h-10 rounded-full overflow-hidden">
+<img alt="Kobe Jackson" class="w-full h-full object-cover" data-alt="Close-up of a young man with a friendly expression, natural outdoor lighting with soft green foliage background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCcanGjCJWZMN3AdDpAqL4dXe6S6-afUCMeJ5Ji9OP5BQMSOBHcACb8OdhC3oqI2oiQzzSQlvrAl4-dcOwjnqrg3dFiRagBtu4XyZRwI_XWeuDFihgc1n3ZOiWpbhHQd1R2O6NImnTj83DM1JdoKAtA1xaM_N1VtL16dh_JQTGBU_LmLv8erG6KZm1PaiLRL_GkrxLHJjoPNt11WWx2f32yZMrihctYEy4oTfFiYM2EdMsAayFefOYQbt5w4RiWv1_5q6xEwFWMFcuv"/>
+</div>
+<div>
+<h3 class="font-['Be_Vietnam_Pro'] font-bold text-on-surface">Kobe Jackson</h3>
+<p class="font-['Be_Vietnam_Pro'] text-label-sm text-on-surface-variant">October 14, 2023</p>
+</div>
+</div>
+<div class="flex items-center gap-xs text-tertiary-fixed-dim mb-xs">
+<span class="material-symbols-outlined star-fill" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined star-fill" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined star-fill" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined star-fill" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined star-fill" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+<h4 class="font-['Plus_Jakarta_Sans'] font-bold text-body-lg text-primary mb-xs">Incredible quality for the price!</h4>
+<p class="font-['Be_Vietnam_Pro'] text-body-md text-on-surface-variant mb-md leading-relaxed">
+                    Honestly shocked at how fresh the food was. I picked up a surplus basket from UQ Food Chains and the sourdough bread was still crusty and the pastries were elite. Amazing value and feels great to help reduce waste.
+                </p>
+<!-- Review Photos -->
+<div class="flex gap-sm mb-md overflow-x-auto pb-xs">
+<div class="w-40 h-40 flex-shrink-0 rounded-xl overflow-hidden bg-surface-container shadow-sm">
+<img alt="Fresh bread" class="w-full h-full object-cover" data-alt="Artisan sourdough loaf with deep golden crust and beautiful scoring, resting on a rustic wooden board with soft kitchen lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD5b6oAJ3eMiKuP92dzchFKEjeCy0dlYzLi6axvstonjY48L3OTV6nm0rQSzcdtMGfgHRcMQZ0zGvNftAMHvppHnZHO9HKruGaIjDEsaCRVNYXOPQR8Gps9Q4TDc0oYrhScUcM_zv1YOmnQjJO84j43v1oc4xGuyjV45kOCpR6EOM0dGn8TEcOdvtZ-TYI1i2lX5wJbYOoGgUTIHCN8rzJEGvQEM640cuhKlUXJGqWbvg_z25VP8-Qv1U09ZZbGJSWl9xFTmT237_d5"/>
+</div>
+<div class="w-40 h-40 flex-shrink-0 rounded-xl overflow-hidden bg-surface-container shadow-sm">
+<img alt="Pastries" class="w-full h-full object-cover" data-alt="Assorted French pastries including flaky croissants and fruit tarts arranged beautifully on a ceramic plate" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB1n_xIk-McPdRmP7XHAWVoBAWXJe65iGtCShU26UAaeC-P8BsUgIP5_vkgdxtNJqkEw-H8-eHKjXyaHEBmIksgNJ6EkJNO2PO2H_QQ59AC0k1yruL8J2xx1BCuUcR3nAP5GYILP6OG7VApPN7Ii3-V2draqAmx3nL6lGXsRo7TqMuPZ1KzJ33ojtvIUhHxgBTlilrzYHBeqsNMdVM-FNu9mEwsOo_xk2CKnChjngiRZ5mjLlpIfqMCeRCL8tDZyHzB7X9GvsUJT1EY"/>
+</div>
+</div>
+<button class="flex items-center gap-xs font-['Be_Vietnam_Pro'] text-label-bold text-on-secondary-container bg-secondary-container px-4 py-2 rounded-full hover:brightness-95 transition-all active:scale-95">
+<span class="material-symbols-outlined text-[18px]" data-icon="thumb_up">thumb_up</span>
+                    Helpful
+                </button>
+</article>
+<!-- Review 2: Mayumi Komukai -->
+<article class="border-b border-surface-container-highest pb-lg">
+<div class="flex items-center gap-sm mb-sm">
+<div class="w-10 h-10 rounded-full overflow-hidden">
+<img alt="Mayumi Komukai" class="w-full h-full object-cover" data-alt="Close-up portrait of a woman with a serene expression, soft morning light coming from the side, minimalist background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCQWzXt7lK2px3tAkusrqroyLYUiAsrbJOGRgusoW3Mlgzvp-9MR7YOKlKVNR7mTxqR3TYKzGvSEAiPiOVD36Bp0DqMvd3YG7jvJuAW2NLzQsh-AKjtYX-QE1Tpvf2tsoeoIJT6Stc2NoB4d4UXp8gDv_4dDqEEcYf2EirxrUPvpcDfGIApt_GW8ANqDfOUzV8AXGva6CZH5_kc0Q5UlPqx64Kv1_3rofePT5dBmK8l_iHXkG_waakP3su3QUrU8STH30N5L0bscwRT"/>
+</div>
+<div>
+<h3 class="font-['Be_Vietnam_Pro'] font-bold text-on-surface">Mayumi Komukai</h3>
+<p class="font-['Be_Vietnam_Pro'] text-label-sm text-on-surface-variant">October 11, 2023</p>
+</div>
+</div>
+<div class="flex items-center gap-xs text-tertiary-fixed-dim mb-xs">
+<span class="material-symbols-outlined star-fill" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined star-fill" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined star-fill" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined star-fill" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined star-fill" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+<h4 class="font-['Plus_Jakarta_Sans'] font-bold text-body-lg text-primary mb-xs">A hidden gem for sustainable eating</h4>
+<p class="font-['Be_Vietnam_Pro'] text-body-md text-on-surface-variant mb-md leading-relaxed">
+                    The portion size was much larger than expected. I received enough roasted vegetables and grains to last for two meals. Everything was perfectly seasoned. The pick-up process was seamless and the staff were lovely.
+                </p>
+<!-- Review Photo -->
+<div class="flex gap-sm mb-md overflow-x-auto pb-xs">
+<div class="w-full h-48 flex-shrink-0 rounded-xl overflow-hidden bg-surface-container shadow-sm">
+<img alt="Healthy meal" class="w-full h-full object-cover" data-alt="Vibrant mediterranean salad bowl with roasted vegetables, quinoa, and fresh greens, shot from above with bright natural lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDSPb3-DCc4YJEMphfnORrQk--cqhshLj5PZfXGRp45E0C4K0GYnVdJRgWgd3Roe3_b637SHFpJkXUFNDZFwbnAqz2Cre9oJdrUrP4E1oAPjdpsnn3A_aZoF6QXq-XpD_Z1JDjy5hfdzci3nf48MBZQYLm3RYy0ei8mXjFzQt7hZ-KFWpcarLZSBJoNPmItL178fiQ_RRp0cfcdpR8iqY8GZRN6Ht9EWHh6HijmYz57OXWqaixGug0elV28AOfMf8wBkkcbCG-2jO_v"/>
+</div>
+</div>
+<button class="flex items-center gap-xs font-['Be_Vietnam_Pro'] text-label-bold text-on-secondary-container bg-secondary-container px-4 py-2 rounded-full hover:brightness-95 transition-all active:scale-95">
+<span class="material-symbols-outlined text-[18px]" data-icon="thumb_up">thumb_up</span>
+                    Helpful
+                </button>
+</article>
+</div>
+<!-- FAB (Contextually suppressed for Detail Screen as per instructions, but adding a "Write a Review" button in-page) -->
+<div class="mt-xl text-center">
+<button class="bg-primary text-on-primary font-['Plus_Jakarta_Sans'] font-bold px-xl py-md rounded-full shadow-[0_8px_30px_rgb(57,6,99,0.2)] hover:scale-[1.02] transition-transform active:scale-95">
+                Write a review
+            </button>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full h-20 bg-white/95 backdrop-blur-lg border-t border-purple-100 shadow-[0_-4px_24px_rgba(81,36,122,0.08)] flex justify-around items-center px-4 pb-safe z-50 rounded-t-2xl">
+<a class="flex flex-col items-center justify-center text-slate-400 px-4 py-1.5 hover:text-purple-600 transition-transform duration-150 active:scale-90" href="#">
+<span class="material-symbols-outlined" data-icon="explore">explore</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[11px] font-semibold tracking-wide">Explore</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-400 px-4 py-1.5 hover:text-purple-600 transition-transform duration-150 active:scale-90" href="#">
+<span class="material-symbols-outlined" data-icon="bookmark">bookmark</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[11px] font-semibold tracking-wide">Saved</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-400 px-4 py-1.5 hover:text-purple-600 transition-transform duration-150 active:scale-90" href="#">
+<span class="material-symbols-outlined" data-icon="history">history</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[11px] font-semibold tracking-wide">History</span>
+</a>
+<a class="flex flex-col items-center justify-center text-purple-800 bg-purple-50 rounded-xl px-4 py-1.5 transition-transform duration-150 active:scale-90" href="#">
+<span class="material-symbols-outlined star-fill" data-icon="person" style="font-variation-settings: 'FILL' 1;">person</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[11px] font-semibold tracking-wide">Profile</span>
+</a>
+</nav>
+</body></html>

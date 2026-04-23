@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Be+Vietnam+Pro:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-highest": "#e8e0e8",
+                        "surface-variant": "#e8e0e8",
+                        "secondary-container": "#edd4fe",
+                        "surface-container-high": "#eee6ee",
+                        "primary-container": "#51247a",
+                        "on-primary-fixed-variant": "#5d3186",
+                        "surface-container-lowest": "#ffffff",
+                        "on-tertiary": "#ffffff",
+                        "on-secondary-fixed-variant": "#523f61",
+                        "surface-container-low": "#faf1f9",
+                        "on-surface-variant": "#4b4450",
+                        "on-tertiary-fixed-variant": "#5d420a",
+                        "secondary-fixed": "#f1daff",
+                        "on-surface": "#1e1a20",
+                        "inverse-primary": "#ddb7ff",
+                        "surface-bright": "#fff7fd",
+                        "on-primary": "#ffffff",
+                        "primary": "#390663",
+                        "surface-tint": "#764aa0",
+                        "on-secondary-fixed": "#251433",
+                        "on-background": "#1e1a20",
+                        "surface-container": "#f4ebf3",
+                        "tertiary-container": "#503700",
+                        "secondary-fixed-dim": "#d6bee7",
+                        "error": "#ba1a1a",
+                        "tertiary-fixed": "#ffdea9",
+                        "outline": "#7d7481",
+                        "inverse-surface": "#332f35",
+                        "tertiary-fixed-dim": "#e8c17e",
+                        "on-error": "#ffffff",
+                        "inverse-on-surface": "#f7eef6",
+                        "surface": "#fff7fd",
+                        "on-primary-fixed": "#2c0050",
+                        "on-primary-container": "#c192ee",
+                        "on-error-container": "#93000a",
+                        "on-secondary": "#ffffff",
+                        "outline-variant": "#cec3d1",
+                        "error-container": "#ffdad6",
+                        "on-tertiary-fixed": "#271900",
+                        "primary-fixed": "#f0dbff",
+                        "on-secondary-container": "#6d597d",
+                        "on-tertiary-container": "#c5a061",
+                        "surface-dim": "#e0d7df",
+                        "secondary": "#6a577a",
+                        "tertiary": "#342300",
+                        "background": "#fff7fd",
+                        "primary-fixed-dim": "#ddb7ff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "lg": "40px",
+                        "xl": "64px",
+                        "md": "24px",
+                        "base": "8px",
+                        "sm": "12px",
+                        "gutter": "16px",
+                        "xs": "4px",
+                        "container-padding": "20px"
+                    },
+                    "fontFamily": {
+                        "headline-xl": ["Plus Jakarta Sans"],
+                        "headline-lg": ["Plus Jakarta Sans"],
+                        "label-bold": ["Be Vietnam Pro"],
+                        "body-md": ["Be Vietnam Pro"],
+                        "label-sm": ["Be Vietnam Pro"],
+                        "headline-md": ["Plus Jakarta Sans"],
+                        "body-lg": ["Be Vietnam Pro"]
+                    },
+                    "fontSize": {
+                        "headline-xl": ["40px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                        "headline-lg": ["32px", {"lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                        "label-bold": ["14px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                        "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                        "label-sm": ["12px", {"lineHeight": "1.2", "fontWeight": "500"}],
+                        "headline-md": ["24px", {"lineHeight": "1.4", "fontWeight": "700"}],
+                        "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>.material-symbols-outlined {
+    font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24
+    }
+.bg-welcome-image {
+    background-image: linear-gradient(to bottom, rgba(30, 26, 32, 0.1), rgba(30, 26, 32, 0.8)), url(https://lh3.googleusercontent.com/aida-public/AB6AXuAvnXbSqK_VdrxJjHZ7vPM5y4_qa5Q9wgwuB7Z9N-W2zfFdhJI_MjKTHQgQQ4WL8W7ilm1nwVBpeh6Q8CyDEGtAFR0bZqQAeWxqTcJqMQYLX2zrbzVN8DIIWF98jJtVogmSih7AbCfAmmB8QfVn5KYlK59aP23QuHmJFin3MSLdNrxTR2OgioNoB1yoaLEJohsLR590QVwio5eoyxbtb9wHKPKbMN_Cd90XMQl_HczAKpORD8Tu9dFBfVDzFJLQYiOcJVLVZciy0Bvh);
+    background-size: cover;
+    background-position: center
+    }
+.glass-effect {
+    backdrop-filter: blur(12px);
+    background: rgba(255, 255, 255, 0.08)
+    }</style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface font-body-md text-on-surface">
+<div class="relative min-h-screen flex flex-col overflow-hidden bg-welcome-image" data-alt="Close-up of vibrant organic vegetables including purple kale, heirloom tomatoes, and fresh herbs with warm morning light and cinematic shallow depth of field">
+<div class="flex-1 flex flex-col justify-between px-container-padding py-xl z-10">
+<div class="flex flex-col items-center pt-lg">
+<div class="flex items-center gap-xs mb-sm">
+<span class="material-symbols-outlined text-tertiary-fixed text-[32px]">eco</span>
+</div>
+<h1 class="font-headline-xl text-headline-xl text-surface-lowest text-center tracking-tighter italic">
+                    Extra Bite
+                </h1>
+<p class="font-body-lg text-body-lg text-surface-container-lowest opacity-90 text-center max-w-[280px] mt-base">
+                    Delicious food saved, one bite at a time.
+                </p>
+</div>
+<div class="flex flex-col gap-md items-center mb-base">
+<div class="glass-effect rounded-xl px-md py-sm flex items-center gap-sm border border-white/10 shadow-[0_4px_24px_rgba(81,36,122,0.2)]">
+<div class="bg-tertiary-fixed/20 p-xs rounded-full">
+<span class="material-symbols-outlined text-tertiary-fixed text-md" style="font-variation-settings: 'FILL' 1;">eco</span>
+</div>
+<div>
+<p class="font-label-bold text-label-bold text-white">4,281 lbs saved today</p>
+<div class="w-full h-1.5 bg-white/20 rounded-full mt-xs overflow-hidden">
+<div class="h-full bg-tertiary-fixed w-3/4 rounded-full"></div>
+</div>
+</div>
+</div>
+<div class="w-full flex flex-col gap-sm">
+<button class="w-full h-16 bg-primary text-on-primary font-headline-md text-headline-md rounded-full shadow-lg flex items-center justify-center gap-base active:scale-95 transition-all duration-200">
+                        Let's Get Started
+                    </button>
+<button class="w-full h-12 flex items-center justify-center">
+<p class="font-label-bold text-label-bold text-surface-lowest">
+                            Already have an account? <span class="text-secondary-fixed underline underline-offset-4 decoration-secondary-fixed/50">Log In</span>
+</p>
+</button>
+</div>
+</div>
+</div>
+<div class="absolute inset-0 pointer-events-none">
+<div class="absolute top-1/4 -left-12 w-48 h-48 bg-primary/20 rounded-full blur-[100px]"></div>
+<div class="absolute bottom-1/4 -right-12 w-64 h-64 bg-tertiary/20 rounded-full blur-[120px]"></div>
+</div>
+</div>
+</body></html>

@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Order History - Extra Bite</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Be+Vietnam+Pro:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-container-highest": "#e8e0e8",
+                    "surface-variant": "#e8e0e8",
+                    "secondary-container": "#edd4fe",
+                    "surface-container-high": "#eee6ee",
+                    "primary-container": "#51247a",
+                    "on-primary-fixed-variant": "#5d3186",
+                    "surface-container-lowest": "#ffffff",
+                    "on-tertiary": "#ffffff",
+                    "on-secondary-fixed-variant": "#523f61",
+                    "surface-container-low": "#faf1f9",
+                    "on-surface-variant": "#4b4450",
+                    "on-secondary-fixed": "#251433",
+                    "on-surface": "#1e1a20",
+                    "inverse-primary": "#ddb7ff",
+                    "surface-bright": "#fff7fd",
+                    "on-primary": "#ffffff",
+                    "primary": "#390663",
+                    "surface-tint": "#764aa0",
+                    "on-background": "#1e1a20",
+                    "surface-container": "#f4ebf3",
+                    "tertiary-container": "#503700",
+                    "secondary-fixed-dim": "#d6bee7",
+                    "error": "#ba1a1a",
+                    "tertiary-fixed": "#ffdea9",
+                    "outline": "#7d7481",
+                    "inverse-surface": "#332f35",
+                    "tertiary-fixed-dim": "#e8c17e",
+                    "on-error": "#ffffff",
+                    "inverse-on-surface": "#f7eef6",
+                    "surface": "#fff7fd",
+                    "on-primary-fixed": "#2c0050",
+                    "on-primary-container": "#c192ee",
+                    "on-error-container": "#93000a",
+                    "on-secondary": "#ffffff",
+                    "outline-variant": "#cec3d1",
+                    "error-container": "#ffdad6",
+                    "on-tertiary-fixed": "#271900",
+                    "primary-fixed": "#f0dbff",
+                    "on-secondary-container": "#6d597d",
+                    "on-tertiary-container": "#c5a061",
+                    "surface-dim": "#e0d7df",
+                    "secondary": "#6a577a",
+                    "tertiary": "#342300",
+                    "background": "#fff7fd",
+                    "primary-fixed-dim": "#ddb7ff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "lg": "40px",
+                    "xl": "64px",
+                    "md": "24px",
+                    "base": "8px",
+                    "sm": "12px",
+                    "gutter": "16px",
+                    "xs": "4px",
+                    "container-padding": "20px"
+            },
+            "fontFamily": {
+                    "headline-xl": ["Plus Jakarta Sans"],
+                    "headline-lg": ["Plus Jakarta Sans"],
+                    "label-bold": ["Be Vietnam Pro"],
+                    "body-md": ["Be Vietnam Pro"],
+                    "label-sm": ["Be Vietnam Pro"],
+                    "headline-md": ["Plus Jakarta Sans"],
+                    "body-lg": ["Be Vietnam Pro"]
+            },
+            "fontSize": {
+                    "headline-xl": ["40px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "headline-lg": ["32px", {"lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "label-bold": ["14px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                    "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                    "label-sm": ["12px", {"lineHeight": "1.2", "fontWeight": "500"}],
+                    "headline-md": ["24px", {"lineHeight": "1.4", "fontWeight": "700"}],
+                    "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .impact-gradient {
+            background: linear-gradient(135deg, #51247a 0%, #390663 100%);
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background font-body-md min-h-screen pb-32">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-white/90 backdrop-blur-md border-b border-purple-100/20 shadow-[0_4px_20px_rgba(81,36,122,0.05)] flex justify-between items-center px-5 h-16">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-purple-900" data-icon="eco">eco</span>
+<h1 class="font-['Plus_Jakarta_Sans'] font-extrabold text-xl tracking-tight text-purple-900 italic">Extra Bite</h1>
+</div>
+<div class="w-10 h-10 rounded-full overflow-hidden border-2 border-primary-fixed shadow-sm">
+<img alt="User profile photo" class="w-full h-full object-cover" data-alt="close-up portrait of a smiling woman with a natural look and soft outdoor lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDzMPGVROIDMDY1UeUxHMw9bEfy2qIgJ_nEd_cjzkXXz7qesIry0RyDP23DjUjtncGFHrAR7C2vCcLO6bpXmHGEpW-giAKW8cMjeO0TJUV6nzbc5JFFE0mObxoI56bdRyQ9IFgzdHu6z_uejS0NGb-fjddaODTDFS1OVlHaGc_0ofH0o10SRzSnpCfBlyGPdYiSDwB-JnOQNJ_i_MP8g70qf8Yd67njaQ-qspjNY__8HEkS33B-mHaDz5ehBZDZohUSwVs-F6IpGyrH"/>
+</div>
+</header>
+<main class="pt-24 px-container-padding space-y-md">
+<!-- History Header -->
+<div class="flex flex-col gap-xs">
+<h2 class="font-headline-lg text-headline-lg text-primary">History</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Your journey of saving delicious food.</p>
+</div>
+<!-- Order List -->
+<section class="space-y-gutter">
+<!-- Order Item 1 -->
+<div class="glass-card rounded-xl p-base shadow-[0_4px_20px_rgba(81,36,122,0.05)] border border-surface-container-highest transition-transform active:scale-[0.98]">
+<div class="flex gap-md">
+<div class="w-24 h-24 rounded-lg overflow-hidden flex-shrink-0">
+<img alt="Artisan Harvest Bowl" class="w-full h-full object-cover" data-alt="vibrant healthy grain bowl with fresh vegetables, avocado slices, and seeds in a ceramic bowl" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA8p2_RN5woP9oVdMlG-v3AIxudkCIw08-7ssqej3VuQ_jfYhhGdXWki56JF_Xt4SCkxPpz_b8mAsDg9xrYId3zq8kO1irzwz57IMK5nTHfN-w491Evt7RV0cJjXAp5Ez6tv-_mNfpNphBISZoAkdfm2DIQ_Lr3gNEAx5vqctg-5rGzqKUmSCsPalQ7elM-_pew7p_qqpctctJp5Ih8U6WN-mB218RvJ4s32jInVIXxHhSYfI6EL3j675el1-mdiownM6Hmxqgq0COk"/>
+</div>
+<div class="flex-1 py-xs flex flex-col justify-between">
+<div>
+<div class="flex justify-between items-start">
+<h3 class="font-headline-md text-body-lg text-on-surface font-bold">Artisan Harvest Bowl</h3>
+<span class="font-label-bold text-label-bold text-tertiary-fixed-dim">$6.50</span>
+</div>
+<p class="font-label-sm text-label-sm text-outline flex items-center gap-xs">
+<span class="material-symbols-outlined text-[14px]" data-icon="calendar_today">calendar_today</span>
+                                Oct 12, 2023
+                            </p>
+</div>
+<div class="mt-sm flex flex-col gap-xs">
+<div class="flex gap-xs text-surface-container-highest">
+<span class="material-symbols-outlined text-[20px]" data-icon="star">star</span>
+<span class="material-symbols-outlined text-[20px]" data-icon="star">star</span>
+<span class="material-symbols-outlined text-[20px]" data-icon="star">star</span>
+<span class="material-symbols-outlined text-[20px]" data-icon="star">star</span>
+<span class="material-symbols-outlined text-[20px]" data-icon="star">star</span>
+</div>
+<button class="text-left font-label-sm text-label-sm text-primary-container hover:underline">
+                                Rate Us to see what everyone else has to say
+                            </button>
+</div>
+</div>
+</div>
+</div>
+<!-- Order Item 2 -->
+<div class="glass-card rounded-xl p-base shadow-[0_4px_20px_rgba(81,36,122,0.05)] border border-surface-container-highest transition-transform active:scale-[0.98]">
+<div class="flex gap-md">
+<div class="w-24 h-24 rounded-lg overflow-hidden flex-shrink-0">
+<img alt="Bakery Surplus Box" class="w-full h-full object-cover" data-alt="assortment of fresh golden-brown croissants and sourdough bread in a rustic wooden box" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAeMecXp3AfwTqV9QOrK-JWXROM-4UlX9HcHGB4OK1csH7LlIt5Bapzb1R3tCXW622LyCQQRWrjFDsB5byF0h1CgoBiaZn9AZrYHE-Z8dPx3AiTNr_yqBAuOiEqhgR6hRTnfICfaMaUaEgFnnn78In-snfBo6Ee7dbUFqjoEjnZCWArJ3pkRTTENIytntfUl9_IXNvAJ4rmU4fHzxCt2XnsoDyvdmDWR_43Ye0ZXBfk0i_31mEtGhyeP2H6henxJxKGz5tn3Il51lJ6"/>
+</div>
+<div class="flex-1 py-xs flex flex-col justify-between">
+<div>
+<div class="flex justify-between items-start">
+<h3 class="font-headline-md text-body-lg text-on-surface font-bold">Bakery Surplus Box</h3>
+<span class="font-label-bold text-label-bold text-tertiary-fixed-dim">$4.99</span>
+</div>
+<p class="font-label-sm text-label-sm text-outline flex items-center gap-xs">
+<span class="material-symbols-outlined text-[14px]" data-icon="calendar_today">calendar_today</span>
+                                Oct 08, 2023
+                            </p>
+</div>
+<div class="mt-sm flex flex-col gap-xs">
+<div class="flex gap-xs text-surface-container-highest">
+<span class="material-symbols-outlined text-[20px]" data-icon="star">star</span>
+<span class="material-symbols-outlined text-[20px]" data-icon="star">star</span>
+<span class="material-symbols-outlined text-[20px]" data-icon="star">star</span>
+<span class="material-symbols-outlined text-[20px]" data-icon="star">star</span>
+<span class="material-symbols-outlined text-[20px]" data-icon="star">star</span>
+</div>
+<button class="text-left font-label-sm text-label-sm text-primary-container hover:underline">
+                                Rate Us to see what everyone else has to say
+                            </button>
+</div>
+</div>
+</div>
+</div>
+<!-- Order Item 3 -->
+<div class="glass-card rounded-xl p-base shadow-[0_4px_20px_rgba(81,36,122,0.05)] border border-surface-container-highest transition-transform active:scale-[0.98]">
+<div class="flex gap-md">
+<div class="w-24 h-24 rounded-lg overflow-hidden flex-shrink-0">
+<img alt="Garden Fresh Salad" class="w-full h-full object-cover" data-alt="close-up of a vibrant green salad with cherry tomatoes, cucumbers, and a light vinaigrette dressing" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCYI1prOogWWX-vN-JKcGx1I65YDjiHr5N51JEMPiLad2ImmCODh1XKfoZpc_BHuifhYXuplyyCl5drNDlxWrNf7LrNF5e14NBz_6SI1X_jclEkjPsiDi6-8Z6V0qZYhr6RfmK2bIJM-AHv_0O2TGhAZS1UQdYQ3wkCdqmXNd50smIwXYvvEhMFD8WeSKuTSagTtcushZOW5pRFeKQNGKaun3enE0j6Grm3mfbeEoYAFQcjHdSMIXzKyhjOiUFBl_wiblGqIjK-eaYB"/>
+</div>
+<div class="flex-1 py-xs flex flex-col justify-between">
+<div>
+<div class="flex justify-between items-start">
+<h3 class="font-headline-md text-body-lg text-on-surface font-bold">Garden Fresh Salad</h3>
+<span class="font-label-bold text-label-bold text-tertiary-fixed-dim">$5.25</span>
+</div>
+<p class="font-label-sm text-label-sm text-outline flex items-center gap-xs">
+<span class="material-symbols-outlined text-[14px]" data-icon="calendar_today">calendar_today</span>
+                                Oct 02, 2023
+                            </p>
+</div>
+<div class="mt-sm flex flex-col gap-xs">
+<div class="flex gap-xs text-surface-container-highest">
+<span class="material-symbols-outlined text-[20px]" data-icon="star">star</span>
+<span class="material-symbols-outlined text-[20px]" data-icon="star">star</span>
+<span class="material-symbols-outlined text-[20px]" data-icon="star">star</span>
+<span class="material-symbols-outlined text-[20px]" data-icon="star">star</span>
+<span class="material-symbols-outlined text-[20px]" data-icon="star">star</span>
+</div>
+<button class="text-left font-label-sm text-label-sm text-primary-container hover:underline">
+                                Rate Us to see what everyone else has to say
+                            </button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Stewardship Impact Card -->
+<section class="mt-xl">
+<div class="impact-gradient rounded-3xl p-md text-white shadow-[0_12px_40px_rgba(57,6,99,0.2)] overflow-hidden relative">
+<!-- Abstract Sparkle Shape Decoration -->
+<div class="absolute -right-8 -top-8 w-32 h-32 bg-white/10 rounded-full blur-2xl"></div>
+<div class="flex items-center gap-sm mb-base">
+<span class="material-symbols-outlined text-tertiary-fixed-dim" data-icon="stars" data-weight="fill" style="font-variation-settings: 'FILL' 1;">stars</span>
+<h4 class="font-headline-md text-body-lg text-white font-bold">Stewardship Impact</h4>
+</div>
+<div class="space-y-sm">
+<div class="flex justify-between items-end">
+<span class="font-body-md text-on-primary-container">Monthly Progress</span>
+<span class="font-headline-md text-headline-md text-tertiary-fixed-dim">4.2<span class="text-label-sm opacity-80">/6.0kg</span></span>
+</div>
+<!-- Impact Progress Bar -->
+<div class="w-full h-4 bg-white/20 rounded-full overflow-hidden border border-white/10 p-[2px]">
+<div class="h-full bg-tertiary-fixed-dim rounded-full relative overflow-hidden" style="width: 70%">
+<!-- Sparkle animation placeholder effect -->
+<div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-full"></div>
+</div>
+</div>
+<p class="font-label-sm text-label-sm text-on-primary-container leading-relaxed">
+                        You've diverted <span class="text-white font-bold">4.2kg</span> of food waste this month. You're only 1.8kg away from your community goal!
+                    </p>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full h-20 bg-white/95 backdrop-blur-lg border-t border-purple-100 flex justify-around items-center px-4 pb-safe z-50 shadow-[0_-4px_24px_rgba(81,36,122,0.08)]">
+<div class="flex flex-col items-center justify-center text-slate-400 px-4 py-1.5 hover:text-purple-600 transition-colors">
+<span class="material-symbols-outlined" data-icon="explore">explore</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[11px] font-semibold tracking-wide">Explore</span>
+</div>
+<div class="flex flex-col items-center justify-center text-slate-400 px-4 py-1.5 hover:text-purple-600 transition-colors">
+<span class="material-symbols-outlined" data-icon="bookmark">bookmark</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[11px] font-semibold tracking-wide">Saved</span>
+</div>
+<div class="flex flex-col items-center justify-center text-purple-800 bg-purple-50 rounded-xl px-4 py-1.5">
+<span class="material-symbols-outlined" data-icon="history">history</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[11px] font-semibold tracking-wide">History</span>
+</div>
+<div class="flex flex-col items-center justify-center text-slate-400 px-4 py-1.5 hover:text-purple-600 transition-colors">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[11px] font-semibold tracking-wide">Profile</span>
+</div>
+</nav>
+</body></html>

@@ -1,0 +1,18 @@
+{
+  "name": "Extra Bite",
+  "short_name": "Extra Bite",
+  "description": "Save surplus campus meals — food rescue made easy.",
+  "start_url": "/welcome",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#390663",
+  "theme_color": "#390663",
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
