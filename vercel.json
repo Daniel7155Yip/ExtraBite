@@ -1,13 +1,4 @@
 {
   "cleanUrls": true,
-  "trailingSlash": false,
-  "rewrites": [
-    { "source": "/", "destination": "/index.html" },
-    { "source": "/welcome", "destination": "/welcome_to_extra_bite/index.html" },
-    { "source": "/explore", "destination": "/explore_brisbane/index.html" },
-    { "source": "/meal", "destination": "/mystery_meal_details/index.html" },
-    { "source": "/history", "destination": "/order_history/index.html" },
-    { "source": "/reviews", "destination": "/location_reviews/index.html" },
-    { "source": "/profile", "destination": "/profile/index.html" }
-  ]
+  "trailingSlash": false
 }
