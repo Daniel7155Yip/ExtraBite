@@ -408,10 +408,19 @@
   document.querySelector('header h1').textContent = config.locationTitle;
 
   const sections = document.querySelectorAll('main > section');
+  const MEAL_PHOTOS = [
+    { src: '/photos/gyg.jpg',                alt: 'GYG meal'         },
+    { src: '/photos/Subway.jpg',             alt: 'Subway meal'      },
+    { src: '/photos/kenko%20sushi.webp',     alt: 'Kenko Sushi'      },
+    { src: '/photos/mekong.jpg',             alt: 'Mekong meal'      },
+    { src: '/photos/bagel%20boy.jpg',        alt: 'Bagel Boy'        },
+    { src: '/photos/20200422_193527.jpg',    alt: 'Meal of the day'  },
+  ];
+  const shuffled = [...MEAL_PHOTOS].sort(() => Math.random() - 0.5).slice(0, 3);
   const galleryImages = sections[0].querySelectorAll('.snap-center img');
-  galleryImages.forEach((img, index) => {
-    img.src = config.gallery[index];
-    img.alt = config.galleryAlts[index];
+  galleryImages.forEach((img, i) => {
+    img.src = shuffled[i].src;
+    img.alt = shuffled[i].alt;
   });
 
   const infoSection = sections[1];
