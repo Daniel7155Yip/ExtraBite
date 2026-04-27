@@ -154,10 +154,20 @@
       <div class="absolute inset-y-0 left-4 flex items-center pointer-events-none">
         <span class="material-symbols-outlined text-slate-400">search</span>
       </div>
-      <input class="w-full h-12 pl-12 pr-4 bg-white/96 border border-white/70 rounded-full shadow-[0_8px_24px_rgba(81,36,122,0.08)] focus:ring-2 focus:ring-primary-container text-body-md font-label-bold transition-all" placeholder="Search locations..." type="text"/>
-      <div class="absolute inset-y-0 right-4 flex items-center">
-        <span class="material-symbols-outlined text-primary-container">tune</span>
-      </div>
+      <input id="search-input"
+        class="w-full h-12 pl-12 pr-12 bg-white/96 border border-white/70 rounded-full shadow-[0_8px_24px_rgba(81,36,122,0.08)] focus:ring-2 focus:ring-primary-container text-body-md font-label-bold transition-all"
+        placeholder="Search a location..."
+        type="text"
+        onkeydown="if(event.key==='Enter'){searchLocation(this.value);this.blur();}"/>
+      <button id="location-btn" onclick="useCurrentLocation()"
+        title="Use my current location"
+        class="absolute inset-y-0 right-0 w-12 flex items-center justify-center rounded-full hover:bg-purple-50 active:scale-90 transition-all">
+        <span class="material-symbols-outlined text-primary text-[22px]" style="font-variation-settings:'FILL' 1;">my_location</span>
+      </button>
+    </div>
+    <!-- Toast notification -->
+    <div id="search-toast"
+      class="mt-2 mx-1 text-center text-[12px] font-semibold text-white bg-[#1e1a20dd] rounded-full px-4 py-1.5 shadow opacity-0 transition-opacity duration-300 pointer-events-none select-none">
     </div>
   </div>
 
@@ -323,6 +333,95 @@
     card.classList.remove('card-visible');
     card.classList.add('card-hidden');
   }
+
+  /* ── Search & location helpers ── */
+  const UQ_LAT = -27.4975, UQ_LNG = 153.0137, MAX_KM = 100;
+
+  function haversineKm(lat1, lon1, lat2, lon2) {
+    const R = 6371, toRad = d => d * Math.PI / 180;
+    const dLat = toRad(lat2 - lat1), dLon = toRad(lon2 - lon1);
+    const a = Math.sin(dLat/2)**2 +
+              Math.cos(toRad(lat1)) * Math.cos(toRad(lat2)) * Math.sin(dLon/2)**2;
+    return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+  }
+
+  function showToast(msg, duration = 3500) {
+    const t = document.getElementById('search-toast');
+    t.textContent = msg;
+    t.style.opacity = '1';
+    clearTimeout(t._timer);
+    t._timer = setTimeout(() => { t.style.opacity = '0'; }, duration);
+  }
+
+  function setLocationBtnLoading(loading) {
+    const icon = document.querySelector('#location-btn .material-symbols-outlined');
+    icon.textContent = loading ? 'sync' : 'my_location';
+    icon.style.animation = loading ? 'spin 1s linear infinite' : '';
+  }
+
+  /* Geocode typed address → pan map */
+  async function searchLocation(query) {
+    query = query.trim();
+    if (!query) return;
+    try {
+      const url = `https://nominatim.openstreetmap.org/search?format=json&limit=1&q=${encodeURIComponent(query)}&countrycodes=au`;
+      const res  = await fetch(url, { headers: { 'Accept-Language': 'en' } });
+      const data = await res.json();
+      if (!data.length) { showToast('Location not found — try a different search'); return; }
+      const lat = parseFloat(data[0].lat), lng = parseFloat(data[0].lon);
+      if (haversineKm(UQ_LAT, UQ_LNG, lat, lng) > MAX_KM) {
+        showToast('That location is more than 100 km from St Lucia');
+        return;
+      }
+      const label = data[0].display_name.split(',').slice(0, 2).join(', ');
+      document.getElementById('search-input').value = label;
+      map.setView([lat, lng], 15, { animate: true });
+    } catch {
+      showToast('Search failed — check your connection and try again');
+    }
+  }
+
+  /* GPS → fill search bar → pan map */
+  function useCurrentLocation() {
+    if (!navigator.geolocation) { showToast('Geolocation is not supported by your browser'); return; }
+    setLocationBtnLoading(true);
+    navigator.geolocation.getCurrentPosition(
+      async ({ coords: { latitude, longitude } }) => {
+        if (haversineKm(UQ_LAT, UQ_LNG, latitude, longitude) > MAX_KM) {
+          setLocationBtnLoading(false);
+          showToast('Your location is more than 100 km from St Lucia');
+          return;
+        }
+        try {
+          const url  = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`;
+          const res  = await fetch(url, { headers: { 'Accept-Language': 'en' } });
+          const data = await res.json();
+          const label = data.display_name
+            ? data.display_name.split(',').slice(0, 2).join(', ')
+            : `${latitude.toFixed(5)}, ${longitude.toFixed(5)}`;
+          document.getElementById('search-input').value = label;
+        } catch {
+          document.getElementById('search-input').value =
+            `${latitude.toFixed(5)}, ${longitude.toFixed(5)}`;
+        }
+        map.setView([latitude, longitude], 16, { animate: true });
+        setLocationBtnLoading(false);
+      },
+      (err) => {
+        setLocationBtnLoading(false);
+        const msg = err.code === 1
+          ? 'Location access denied — enable it in browser settings'
+          : 'Could not get your location, please try again';
+        showToast(msg);
+      },
+      { timeout: 10000, maximumAge: 30000 }
+    );
+  }
+
+  /* Spinning icon animation */
+  const style = document.createElement('style');
+  style.textContent = '@keyframes spin { to { transform: rotate(360deg); } }';
+  document.head.appendChild(style);
 </script>
 
 </body>
