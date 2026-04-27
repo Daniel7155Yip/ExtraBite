@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport"/>
+<title>Extra Bite - Preferences</title>
+<meta name="theme-color" content="#390663"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+<meta name="apple-mobile-web-app-title" content="Extra Bite"/>
+<link rel="manifest" href="/manifest.json"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Be+Vietnam+Pro:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-bright": "#fff7fd",
+                    "surface-container-low": "#faf1f9",
+                    "on-surface-variant": "#4b4450",
+                    "on-error-container": "#93000a",
+                    "tertiary": "#342300",
+                    "on-primary-fixed-variant": "#5d3186",
+                    "on-surface": "#1e1a20",
+                    "surface-container-highest": "#e8e0e8",
+                    "secondary-fixed": "#f1daff",
+                    "error-container": "#ffdad6",
+                    "outline-variant": "#cec3d1",
+                    "on-primary": "#ffffff",
+                    "primary": "#390663",
+                    "background": "#fff7fd",
+                    "surface-container-high": "#eee6ee",
+                    "primary-fixed": "#f0dbff",
+                    "surface-container": "#f4ebf3",
+                    "on-tertiary-container": "#c5a061",
+                    "error": "#ba1a1a",
+                    "outline": "#7d7481",
+                    "on-secondary-fixed": "#251433",
+                    "surface-variant": "#e8e0e8",
+                    "on-background": "#1e1a20",
+                    "on-secondary-container": "#6d597d",
+                    "primary-container": "#51247a",
+                    "secondary-container": "#edd4fe",
+                    "surface-dim": "#e0d7df",
+                    "surface-tint": "#764aa0",
+                    "primary-fixed-dim": "#ddb7ff",
+                    "on-tertiary": "#ffffff",
+                    "inverse-surface": "#332f35",
+                    "on-tertiary-fixed": "#271900",
+                    "on-secondary": "#ffffff",
+                    "surface-container-lowest": "#ffffff",
+                    "on-secondary-fixed-variant": "#523f61",
+                    "on-primary-fixed": "#2c0050",
+                    "secondary-fixed-dim": "#d6bee7",
+                    "on-error": "#ffffff",
+                    "inverse-on-surface": "#f7eef6",
+                    "tertiary-fixed-dim": "#e8c17e",
+                    "on-tertiary-fixed-variant": "#5d420a",
+                    "surface": "#fff7fd",
+                    "secondary": "#6a577a",
+                    "tertiary-container": "#503700",
+                    "on-primary-container": "#c192ee",
+                    "inverse-primary": "#ddb7ff",
+                    "tertiary-fixed": "#ffdea9"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "sm": "12px",
+                    "lg": "40px",
+                    "gutter": "16px",
+                    "base": "8px",
+                    "container-padding": "20px",
+                    "xs": "4px",
+                    "md": "24px",
+                    "xl": "64px"
+            },
+            "fontFamily": {
+                    "headline-xl": ["Plus Jakarta Sans"],
+                    "label-bold": ["Be Vietnam Pro"],
+                    "body-lg": ["Be Vietnam Pro"],
+                    "label-sm": ["Be Vietnam Pro"],
+                    "headline-md": ["Plus Jakarta Sans"],
+                    "headline-lg": ["Plus Jakarta Sans"],
+                    "body-md": ["Be Vietnam Pro"]
+            },
+            "fontSize": {
+                    "headline-xl": ["40px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "label-bold": ["14px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                    "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "label-sm": ["12px", {"lineHeight": "1.2", "fontWeight": "500"}],
+                    "headline-md": ["24px", {"lineHeight": "1.4", "fontWeight": "700"}],
+                    "headline-lg": ["32px", {"lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        input[type="range"] {
+            -webkit-appearance: none;
+            width: 100%;
+            background: transparent;
+        }
+        input[type="range"]::-webkit-slider-runnable-track {
+            width: 100%;
+            height: 8px;
+            background: #e8e0e8;
+            border-radius: 4px;
+        }
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            height: 24px;
+            width: 24px;
+            border-radius: 50%;
+            background: #51247a;
+            cursor: pointer;
+            margin-top: -8px;
+            box-shadow: 0 4px 10px rgba(81, 36, 122, 0.2);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface-bright text-on-surface font-body-md min-h-screen pb-32">
+<header class="fixed top-0 w-full z-50 flex items-center px-4 h-16 bg-white/90 backdrop-blur-md border-b border-purple-100/20 shadow-[0_4px_20px_-4px_rgba(81,36,122,0.08)]">
+<a href="/profile" aria-label="Back to profile" class="flex items-center justify-center w-10 h-10 rounded-full hover:bg-purple-50 transition-colors active:scale-95 duration-150 ease-in-out text-purple-900 no-underline">
+<span class="material-symbols-outlined" data-icon="arrow_back">arrow_back</span>
+</a>
+<h1 class="ml-2 font-headline-md text-headline-md text-purple-900 tracking-tight">Preferences</h1>
+</header>
+<main class="mt-20 px-container-padding max-w-lg mx-auto space-y-10">
+<section class="space-y-6">
+<div class="flex items-center justify-between">
+<h2 class="font-headline-md text-headline-md text-primary">Search Radius</h2>
+<span class="font-label-bold text-label-bold text-on-primary-fixed-variant bg-primary-fixed px-3 py-1 rounded-full">12km</span>
+</div>
+<div class="relative pt-2">
+<input class="cursor-pointer" max="20" min="0" type="range" value="12"/>
+<div class="flex justify-between mt-2 font-label-sm text-label-sm text-outline">
+<span>0km</span>
+<span>20km</span>
+</div>
+</div>
+</section>
+<section class="space-y-4">
+<h2 class="font-headline-md text-headline-md text-primary">Typical Dietary Restrictions</h2>
+<div class="grid grid-cols-1 gap-3">
+<!-- Toggle Item -->
+<label class="flex items-center justify-between p-4 bg-white rounded-xl shadow-[0_4px_12px_rgba(81,36,122,0.04)] border border-purple-50 cursor-pointer hover:border-purple-200 transition-colors">
+<span class="font-body-md text-body-md font-semibold text-on-surface">Vegetarian</span>
+<div class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-surface-container-highest peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-container"></div>
+</div>
+</label>
+<!-- Toggle Item -->
+<label class="flex items-center justify-between p-4 bg-white rounded-xl shadow-[0_4px_12px_rgba(81,36,122,0.04)] border border-purple-50 cursor-pointer hover:border-purple-200 transition-colors">
+<span class="font-body-md text-body-md font-semibold text-on-surface">Vegan</span>
+<div class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-surface-container-highest peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-container"></div>
+</div>
+</label>
+<!-- Toggle Item -->
+<label class="flex items-center justify-between p-4 bg-white rounded-xl shadow-[0_4px_12px_rgba(81,36,122,0.04)] border border-purple-50 cursor-pointer hover:border-purple-200 transition-colors">
+<span class="font-body-md text-body-md font-semibold text-on-surface">Gluten-Free</span>
+<div class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-surface-container-highest peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-container"></div>
+</div>
+</label>
+<!-- Toggle Item -->
+<label class="flex items-center justify-between p-4 bg-white rounded-xl shadow-[0_4px_12px_rgba(81,36,122,0.04)] border border-purple-50 cursor-pointer hover:border-purple-200 transition-colors">
+<span class="font-body-md text-body-md font-semibold text-on-surface">Halal</span>
+<div class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-surface-container-highest peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-container"></div>
+</div>
+</label>
+</div>
+</section>
+<section class="space-y-4">
+<h2 class="font-headline-md text-headline-md text-primary">Notification Settings</h2>
+<div class="space-y-3">
+<div class="flex items-start gap-4 p-4 bg-surface-container-lowest border border-purple-50 rounded-2xl">
+<div class="bg-primary-fixed p-3 rounded-xl text-primary">
+<span class="material-symbols-outlined" data-icon="restaurant">restaurant</span>
+</div>
+<div class="flex-1">
+<h3 class="font-label-bold text-label-bold text-on-surface">New Mystery Meals</h3>
+<p class="font-label-sm text-label-sm text-on-surface-variant mt-1">Get notified when nearby vendors drop new boxes</p>
+</div>
+<div class="relative inline-flex items-center cursor-pointer pt-1">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-surface-container-highest peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-container"></div>
+</div>
+</div>
+<div class="flex items-start gap-4 p-4 bg-surface-container-lowest border border-purple-50 rounded-2xl">
+<div class="bg-secondary-fixed p-3 rounded-xl text-secondary">
+<span class="material-symbols-outlined" data-icon="alarm">alarm</span>
+</div>
+<div class="flex-1">
+<h3 class="font-label-bold text-label-bold text-on-surface">Pickup Reminders</h3>
+<p class="font-label-sm text-label-sm text-on-surface-variant mt-1">Don't miss your collection window</p>
+</div>
+<div class="relative inline-flex items-center cursor-pointer pt-1">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-surface-container-highest peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-container"></div>
+</div>
+</div>
+</div>
+</section>
+<section class="space-y-4">
+<h2 class="font-headline-md text-headline-md text-primary">Preferred Food Types</h2>
+<div class="flex flex-wrap gap-2">
+<button class="px-5 py-2 rounded-full border border-primary-container bg-primary-container text-white font-label-bold text-label-bold flex items-center gap-2 hover:opacity-90 active:scale-95 transition-all">
+<span class="material-symbols-outlined text-[18px]" data-icon="bakery_dining">bakery_dining</span>
+                    Bakery
+                </button>
+<button class="px-5 py-2 rounded-full border border-outline bg-surface-container-lowest text-on-surface-variant font-label-bold text-label-bold flex items-center gap-2 hover:bg-purple-50 active:scale-95 transition-all">
+<span class="material-symbols-outlined text-[18px]" data-icon="restaurant_menu">restaurant_menu</span>
+                    Main Course
+                </button>
+<button class="px-5 py-2 rounded-full border border-primary-container bg-primary-container text-white font-label-bold text-label-bold flex items-center gap-2 hover:opacity-90 active:scale-95 transition-all">
+<span class="material-symbols-outlined text-[18px]" data-icon="eco">eco</span>
+                    Salads
+                </button>
+<button class="px-5 py-2 rounded-full border border-outline bg-surface-container-lowest text-on-surface-variant font-label-bold text-label-bold flex items-center gap-2 hover:bg-purple-50 active:scale-95 transition-all">
+<span class="material-symbols-outlined text-[18px]" data-icon="fastfood">fastfood</span>
+                    Sides
+                </button>
+</div>
+</section>
+<div class="pt-4">
+<button class="w-full h-14 bg-primary-container text-white font-headline-md text-headline-md rounded-2xl shadow-[0_8px_20px_rgba(81,36,122,0.25)] active:scale-[0.98] transition-transform flex items-center justify-center gap-3">
+                Save Preferences
+            </button>
+</div>
+</main>
+<nav class="fixed bottom-0 w-full z-50 flex justify-around items-center px-6 pb-6 pt-3 bg-white border-t border-purple-50 rounded-t-3xl shadow-[0_-8px_30px_-5px_rgba(81,36,122,0.1)]">
+<a class="flex flex-col items-center justify-center text-slate-400 px-5 py-1.5 hover:text-purple-600 transition-colors active:scale-90 duration-200 no-underline" href="/explore">
+<span class="material-symbols-outlined" data-icon="explore">explore</span>
+<span class="font-plus-jakarta-sans font-semibold text-[11px] mt-1">Explore</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-400 px-5 py-1.5 hover:text-purple-600 transition-colors active:scale-90 duration-200 no-underline" href="/history">
+<span class="material-symbols-outlined" data-icon="bookmark">bookmark</span>
+<span class="font-plus-jakarta-sans font-semibold text-[11px] mt-1">Saved</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-400 px-5 py-1.5 hover:text-purple-600 transition-colors active:scale-90 duration-200 no-underline" href="/history">
+<span class="material-symbols-outlined" data-icon="history">history</span>
+<span class="font-plus-jakarta-sans font-semibold text-[11px] mt-1">History</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-purple-50 text-purple-800 rounded-2xl px-5 py-1.5 transition-colors active:scale-90 duration-200 no-underline" href="/profile">
+<span class="material-symbols-outlined" data-icon="person" data-weight="fill" style="font-variation-settings: 'FILL' 1;">person</span>
+<span class="font-plus-jakarta-sans font-semibold text-[11px] mt-1">Profile</span>
+</a>
+</nav>
+</body></html>

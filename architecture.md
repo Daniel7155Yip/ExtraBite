@@ -14,6 +14,8 @@ This document outlines the relationship between the exported folders and the cor
 | `Order_history` | **User Activity Log** | The list of past purchases and the entry point for the rating/review flow. |
 | `Location_reviews` | **Social Proof Store** | The standalone page containing user feedback from Kobe, Mayumi, and others. |
 | `Profile` | **Individual Impact Dashboard** | User stats including "Total Food Saved" (grams) and "Average Cost per Meal". |
+| `Payment_methods` | **Account Payment Settings** | Saved card management, add-card actions, and payment security messaging reached from Profile. |
+| `Preferences` | **Personalization Settings** | Search radius, dietary restrictions, notification toggles, and preferred food type controls reached from Profile. |
 | `Organic_vitality` | **Design System (Global)** | The shared CSS, design tokens (Purple branding), and shared UI components (Top Nav, Bottom Bar). |
 
 ---
@@ -38,9 +40,16 @@ This document outlines the relationship between the exported folders and the cor
 2. **Data Sync:** The app calculates total grams saved by aggregating data from the `Order_history` folder items.
 3. **Display:** Shows real-time savings metrics using the `Organic_vitality` visual style.
 
+### Flow D: Profile Settings
+1. **Entry:** User opens `Profile` from the bottom navigation.
+2. **Payments:** Selecting "Payment Methods" routes to `Payment_methods` for saved card review and add-card actions.
+3. **Preferences:** Selecting "Preferences" routes to `Preferences` for discovery filters, dietary needs, and notification settings.
+4. **Return:** Both settings screens provide a back action to `Profile` and retain the global bottom navigation.
+
 ---
 
 ## 3. Global Dependencies
 *   **Navigation:** All primary folders (except Welcome) depend on the `BottomNavBar` component defined in `Organic_vitality`.
 *   **Branding:** Every screen pulls its color palette (#51247A) and typography (Plus Jakarta Sans) from the `Organic_vitality` theme files.
 *   **Assets:** Icons used for the proportional graph in `Mystery_Meal Details` are shared globally across the app shell.
+*   **Static Routing:** Each routable screen is exposed by an `index.html` file inside its folder so Vercel clean URLs can serve paths such as `/profile`, `/payment_methods`, and `/preferences`.

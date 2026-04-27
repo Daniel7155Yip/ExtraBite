@@ -1,16 +1,27 @@
  web application/stitch/projects/10230113262862289679/screens/e9f856691f144659b727fe01e4e89df0
-# Extra Bite: Full-Stack Implementation Guide
+# Extra Bite: App Stack
 
-This guide outlines the suggested technical architecture for building the "Extra Bite" app into a fully functional product.
+This repository is currently a static, Vercel-ready prototype exported from Stitch. Each screen lives in its own folder and is served by that folder's `index.html` using Vercel clean URLs.
 
-## 1. Suggested Tech Stack
-*   **Frontend:** React Native or Flutter (for cross-platform mobile) or Next.js (for a PWA).
-*   **Backend:** Node.js with Express or Python with FastAPI.
-*   **Database:** PostgreSQL (Relational) for handling users, locations, and orders.
-*   **Maps API:** Google Maps Platform (Maps SDK for Mobile, Places API for search).
-*   **Storage:** AWS S3 or Google Cloud Storage (for stall and meal photos).
+## 1. Current Prototype Stack
+*   **Runtime:** Static HTML pages hosted as clean URL routes (`/welcome`, `/explore`, `/meal`, `/profile`, `/payment_methods`, `/preferences`, etc.).
+*   **Styling:** Tailwind CSS loaded from the CDN with per-screen theme tokens.
+*   **Typography:** Plus Jakarta Sans for headings/brand text and Be Vietnam Pro for body/labels.
+*   **Icons:** Google Material Symbols.
+*   **Assets:** Local images in `/photos`, local SVG app icon, and screen-export screenshots/code files retained beside routable pages.
+*   **PWA Shell:** `manifest.json`, theme color metadata, and mobile viewport settings on integrated screens.
+*   **Deployment:** Vercel static hosting with `cleanUrls` enabled in `vercel.json`.
 
-## 2. Core Data Models (Database Schema)
+## 2. Suggested Production Stack
+*   **Frontend:** Next.js PWA if staying web-first, or React Native/Flutter for a native mobile app.
+*   **Backend:** Node.js with Express/NestJS or Python with FastAPI.
+*   **Database:** PostgreSQL for users, anonymous devices, locations, orders, reviews, payment method references, and preferences.
+*   **Maps API:** Google Maps Platform or Mapbox for maps, geocoding, and place search.
+*   **Payments:** Stripe or a comparable PCI-compliant payment provider. Store provider tokens/customer IDs only, not full card data.
+*   **Storage:** AWS S3, Google Cloud Storage, or equivalent object storage for stall, meal, and review photos.
+*   **State/Data Fetching:** Zustand or Context for local device/profile state; React Query or SWR for availability, profile, settings, and history data.
+
+## 3. Core Data Models (Database Schema)
 
 ### Locations (Stalls)
 - `id`: UUID
@@ -47,7 +58,25 @@ This guide outlines the suggested technical architecture for building the "Extra
 - `comment`: text
 - `photo_urls`: array[string]
 
-## 3. Key Backend Logic (API Endpoints)
+### PaymentMethods
+- `id`: UUID
+- `user_id`: UUID (Anonymous Device ID)
+- `provider`: string (e.g., Stripe)
+- `provider_payment_method_id`: string
+- `brand`: string
+- `last_four`: string
+- `expiry_month`: integer
+- `expiry_year`: integer
+- `is_default`: boolean
+
+### Preferences
+- `user_id`: UUID (Anonymous Device ID)
+- `search_radius_km`: integer
+- `dietary_restrictions`: array[string]
+- `notification_settings`: JSON
+- `preferred_food_types`: array[string]
+
+## 4. Key Backend Logic (API Endpoints)
 
 ### GET `/api/locations/nearby`
 - **Params:** `lat`, `long`, `radius=15km`
@@ -69,9 +98,23 @@ This guide outlines the suggested technical architecture for building the "Extra
   1. Sums `weight_grams` from all `Orders` for that device.
   2. Calculates `average_cost` from total paid / total orders.
 
-## 4. Frontend State Management
+### GET `/api/user/:device_id/payment-methods`
+- **Logic:** Returns tokenized saved payment methods for the anonymous device profile.
+
+### POST `/api/user/:device_id/payment-methods`
+- **Logic:** Creates a payment setup session or stores a provider-returned payment method token.
+
+### GET `/api/user/:device_id/preferences`
+- **Logic:** Returns saved search radius, dietary restrictions, notification settings, and food type preferences.
+
+### PUT `/api/user/:device_id/preferences`
+- **Logic:** Validates and updates profile preferences used by discovery filters and notifications.
+
+## 5. Frontend State Management
 - Use **Context API** or **Zustand** to track the user's "Anonymous ID" (generated on first open and stored in LocalStorage/AsyncStorage).
 - Use **React Query** or **SWR** for real-time updates on meal availability (the progress bar in the details view).
+- Cache payment methods and preferences by device ID, then invalidate the profile/settings queries after updates.
 
-## 5. Security & Authentication
+## 6. Security & Authentication
 - Since the requirement is "No Login", use **Device Fingerprinting** or a persistent **JWT token** stored in the device's secure storage to link the History and Profile to the specific phone without requiring an email/password.
+- Payment details must be handled by a PCI-compliant provider. The app should never store complete card numbers or CVV values.
