@@ -97,95 +97,15 @@
   </div>
 
   <!-- Saved location cards -->
-  <section class="space-y-gutter">
+  <section id="saved-cards" class="space-y-gutter"></section>
 
-    <!-- UQ Food Chains -->
-    <div class="bg-white/80 backdrop-blur-sm rounded-2xl shadow-[0_4px_20px_rgba(81,36,122,0.07)] border border-surface-container-highest overflow-hidden">
-      <!-- Photo banner -->
-      <div class="relative h-32 w-full">
-        <img src="/photos/UQ%20food%20court.jpg" alt="UQ Food Chains" class="w-full h-full object-cover"/>
-        <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
-        <!-- Bookmark button -->
-        <button onclick="toggleSave(this)" class="bookmark-btn saved absolute top-3 right-3 w-9 h-9 bg-white/90 rounded-full flex items-center justify-center shadow-md active:scale-90 transition-transform">
-          <span class="material-symbols-outlined text-[20px]">bookmark</span>
-        </button>
-        <!-- Rating badge -->
-        <div class="absolute bottom-3 left-3 flex items-center gap-1 bg-white/90 px-2 py-0.5 rounded-full shadow-sm">
-          <span class="material-symbols-outlined text-[13px] text-amber-500" style="font-variation-settings:'FILL' 1;">star</span>
-          <span class="text-[12px] font-bold text-on-surface">4.8</span>
-        </div>
-      </div>
-      <!-- Card body -->
-      <div class="p-md">
-        <div class="flex items-start justify-between gap-3 mb-1">
-          <div>
-            <h3 class="font-['Plus_Jakarta_Sans'] font-bold text-[16px] text-on-surface">UQ Food Chains</h3>
-            <p class="text-[12px] text-on-surface-variant flex items-center gap-1 mt-0.5">
-              <span class="material-symbols-outlined text-[13px]">location_on</span>
-              Union Complex, Ground Floor, St Lucia
-            </p>
-          </div>
-          <!-- Purchase count -->
-          <div class="flex flex-col items-center flex-shrink-0 bg-secondary-container rounded-xl px-3 py-1.5">
-            <span class="text-[18px] font-extrabold font-['Plus_Jakarta_Sans'] text-primary leading-none">3</span>
-            <span class="text-[10px] font-semibold text-on-secondary-container leading-tight">purchases</span>
-          </div>
-        </div>
-        <!-- Last visited + CTA -->
-        <div class="flex items-center justify-between mt-3 pt-3 border-t border-surface-container">
-          <p class="text-[11px] text-outline flex items-center gap-1">
-            <span class="material-symbols-outlined text-[13px]">schedule</span>
-            Last visited Oct 12, 2023
-          </p>
-          <a href="/meal" class="bg-primary text-on-primary px-4 py-1.5 rounded-full text-[12px] font-label-bold shadow-[0_4px_12px_rgba(57,6,99,0.2)] active:scale-95 transition-all flex items-center gap-1 no-underline">
-            Claim Bite
-            <span class="material-symbols-outlined text-[14px]">bolt</span>
-          </a>
-        </div>
-      </div>
-    </div>
-
-    <!-- Brisbane CBD Food Court -->
-    <div class="bg-white/80 backdrop-blur-sm rounded-2xl shadow-[0_4px_20px_rgba(81,36,122,0.07)] border border-surface-container-highest overflow-hidden">
-      <div class="relative h-32 w-full">
-        <img src="/photos/Brisbane CBD Food court.jpg" alt="Brisbane CBD Food Court" class="w-full h-full object-cover"/>
-        <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
-        <button onclick="toggleSave(this)" class="bookmark-btn saved absolute top-3 right-3 w-9 h-9 bg-white/90 rounded-full flex items-center justify-center shadow-md active:scale-90 transition-transform">
-          <span class="material-symbols-outlined text-[20px]">bookmark</span>
-        </button>
-        <div class="absolute bottom-3 left-3 flex items-center gap-1 bg-white/90 px-2 py-0.5 rounded-full shadow-sm">
-          <span class="material-symbols-outlined text-[13px] text-amber-500" style="font-variation-settings:'FILL' 1;">star</span>
-          <span class="text-[12px] font-bold text-on-surface">4.7</span>
-        </div>
-      </div>
-      <div class="p-md">
-        <div class="flex items-start justify-between gap-3 mb-1">
-          <div>
-            <h3 class="font-['Plus_Jakarta_Sans'] font-bold text-[16px] text-on-surface">Brisbane CBD Food Court</h3>
-            <p class="text-[12px] text-on-surface-variant flex items-center gap-1 mt-0.5">
-              <span class="material-symbols-outlined text-[13px]">location_on</span>
-              Wintergarden, Queen St Mall, Brisbane
-            </p>
-          </div>
-          <div class="flex flex-col items-center flex-shrink-0 bg-secondary-container rounded-xl px-3 py-1.5">
-            <span class="text-[18px] font-extrabold font-['Plus_Jakarta_Sans'] text-primary leading-none">2</span>
-            <span class="text-[10px] font-semibold text-on-secondary-container leading-tight">purchases</span>
-          </div>
-        </div>
-        <div class="flex items-center justify-between mt-3 pt-3 border-t border-surface-container">
-          <p class="text-[11px] text-outline flex items-center gap-1">
-            <span class="material-symbols-outlined text-[13px]">schedule</span>
-            Last visited Oct 02, 2023
-          </p>
-          <a href="/meal" class="bg-primary text-on-primary px-4 py-1.5 rounded-full text-[12px] font-label-bold shadow-[0_4px_12px_rgba(57,6,99,0.2)] active:scale-95 transition-all flex items-center gap-1 no-underline">
-            Claim Bite
-            <span class="material-symbols-outlined text-[14px]">bolt</span>
-          </a>
-        </div>
-      </div>
-    </div>
-
-  </section>
+  <!-- Empty state -->
+  <div id="empty-state" class="hidden flex-col items-center justify-center py-16 text-center">
+    <span class="material-symbols-outlined text-[56px] text-outline-variant mb-4">bookmark</span>
+    <h3 class="font-['Plus_Jakarta_Sans'] font-bold text-[18px] text-on-surface mb-2">No saved spots yet</h3>
+    <p class="text-[14px] text-on-surface-variant px-8">Tap the bookmark on any meal page to save a location here.</p>
+    <a href="/explore" class="mt-6 bg-primary text-on-primary px-6 py-2.5 rounded-full text-[14px] font-bold shadow-[0_4px_12px_rgba(57,6,99,0.2)] active:scale-95 transition-all no-underline inline-block">Explore Locations</a>
+  </div>
 </main>
 
 <!-- Bottom Navigation Bar -->
@@ -205,11 +125,119 @@
 </nav>
 
 <script>
-  function toggleSave(btn) {
-    btn.classList.toggle('saved');
-    btn.classList.add('scale-90');
-    setTimeout(() => btn.classList.remove('scale-90'), 150);
+  const SAVED_KEY = 'extrabite_saved';
+  const DEFAULT_SAVED = ['uq-food-chains', 'brisbane-cbd-food-court'];
+
+  const ALL_LOCATIONS = {
+    'uq-food-chains': {
+      name: 'UQ Food Chains',
+      address: 'Union Complex, Ground Floor, St Lucia',
+      rating: '4.8',
+      photo: '/photos/UQ%20food%20court.jpg',
+      purchases: 3,
+      lastVisited: 'Oct 12, 2023'
+    },
+    'griffith-food-court': {
+      name: 'Griffith Food Court',
+      address: 'Nathan Campus, Griffith University',
+      rating: '4.6',
+      photo: '/photos/Griffifth%20university.jpg',
+      purchases: 1,
+      lastVisited: 'Sep 28, 2023'
+    },
+    'qut-food-court': {
+      name: 'QUT Food Court',
+      address: 'Gardens Point Campus, QUT, Brisbane',
+      rating: '4.5',
+      photo: '/photos/QUT%20food%20court.jpg',
+      purchases: 1,
+      lastVisited: 'Sep 15, 2023'
+    },
+    'brisbane-cbd-food-court': {
+      name: 'Brisbane CBD Food Court',
+      address: 'Wintergarden, Queen St Mall, Brisbane',
+      rating: '4.7',
+      photo: '/photos/Brisbane%20CBD%20Food%20court.jpg',
+      purchases: 2,
+      lastVisited: 'Oct 02, 2023'
+    }
+  };
+
+  function getSaved() {
+    const raw = localStorage.getItem(SAVED_KEY);
+    if (raw === null) {
+      localStorage.setItem(SAVED_KEY, JSON.stringify(DEFAULT_SAVED));
+      return DEFAULT_SAVED.slice();
+    }
+    try { return JSON.parse(raw) || []; } catch { return []; }
   }
+
+  function unsaveLocation(key) {
+    const list = getSaved().filter(k => k !== key);
+    localStorage.setItem(SAVED_KEY, JSON.stringify(list));
+    renderCards();
+  }
+
+  function renderCards() {
+    const saved = getSaved();
+    const container = document.getElementById('saved-cards');
+    const emptyState = document.getElementById('empty-state');
+
+    if (saved.length === 0) {
+      container.innerHTML = '';
+      emptyState.style.display = 'flex';
+      emptyState.classList.remove('hidden');
+      return;
+    }
+    emptyState.style.display = 'none';
+
+    container.innerHTML = saved.map(key => {
+      const loc = ALL_LOCATIONS[key];
+      if (!loc) return '';
+      return `
+        <div class="bg-white/80 backdrop-blur-sm rounded-2xl shadow-[0_4px_20px_rgba(81,36,122,0.07)] border border-surface-container-highest overflow-hidden">
+          <div class="relative h-32 w-full">
+            <img src="${loc.photo}" alt="${loc.name}" class="w-full h-full object-cover"/>
+            <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
+            <button onclick="unsaveLocation('${key}')" class="bookmark-btn saved absolute top-3 right-3 w-9 h-9 bg-white/90 rounded-full flex items-center justify-center shadow-md active:scale-90 transition-transform">
+              <span class="material-symbols-outlined text-[20px]">bookmark</span>
+            </button>
+            <div class="absolute bottom-3 left-3 flex items-center gap-1 bg-white/90 px-2 py-0.5 rounded-full shadow-sm">
+              <span class="material-symbols-outlined text-[13px] text-amber-500" style="font-variation-settings:'FILL' 1;">star</span>
+              <span class="text-[12px] font-bold text-on-surface">${loc.rating}</span>
+            </div>
+          </div>
+          <div class="p-md">
+            <div class="flex items-start justify-between gap-3 mb-1">
+              <div>
+                <h3 class="font-['Plus_Jakarta_Sans'] font-bold text-[16px] text-on-surface">${loc.name}</h3>
+                <p class="text-[12px] text-on-surface-variant flex items-center gap-1 mt-0.5">
+                  <span class="material-symbols-outlined text-[13px]">location_on</span>
+                  ${loc.address}
+                </p>
+              </div>
+              <div class="flex flex-col items-center flex-shrink-0 bg-secondary-container rounded-xl px-3 py-1.5">
+                <span class="text-[18px] font-extrabold font-['Plus_Jakarta_Sans'] text-primary leading-none">${loc.purchases}</span>
+                <span class="text-[10px] font-semibold text-on-secondary-container leading-tight">purchases</span>
+              </div>
+            </div>
+            <div class="flex items-center justify-between mt-3 pt-3 border-t border-surface-container">
+              <p class="text-[11px] text-outline flex items-center gap-1">
+                <span class="material-symbols-outlined text-[13px]">schedule</span>
+                Last visited ${loc.lastVisited}
+              </p>
+              <a href="/meal?location=${key}" class="bg-primary text-on-primary px-4 py-1.5 rounded-full text-[12px] font-label-bold shadow-[0_4px_12px_rgba(57,6,99,0.2)] active:scale-95 transition-all flex items-center gap-1 no-underline">
+                Claim Bite
+                <span class="material-symbols-outlined text-[14px]">bolt</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      `;
+    }).join('');
+  }
+
+  renderCards();
 </script>
 
 </body>

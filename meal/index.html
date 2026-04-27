@@ -99,8 +99,11 @@
     </a>
     <h1 class="font-['Plus_Jakarta_Sans'] font-bold text-lg tracking-tight text-purple-900">UQ Food Chains</h1>
   </div>
-  <div class="flex items-center gap-3">
-    <span class="material-symbols-outlined text-purple-900">share</span>
+  <div class="flex items-center gap-2">
+    <button id="save-btn" onclick="toggleSave()" class="w-9 h-9 flex items-center justify-center rounded-full hover:bg-purple-50 active:scale-90 transition-transform">
+      <span id="save-icon" class="material-symbols-outlined text-purple-900">bookmark</span>
+    </button>
+    <span class="material-symbols-outlined text-purple-900 cursor-pointer hover:bg-purple-50 p-1 rounded-full">share</span>
     <a href="/profile" class="w-8 h-8 rounded-full bg-surface-container-highest overflow-hidden border border-purple-100 block">
       <img alt="User profile" class="w-full h-full object-cover" src="/photos/simple-user-default-icon-free-png.webp"/>
     </a>
@@ -535,6 +538,44 @@
     // Brief pause then reopen with fresh code
     setTimeout(openClaim, 400);
   }
+
+  /* ── Save / Bookmark ── */
+  const SAVED_KEY = 'extrabite_saved';
+
+  function getSavedList() {
+    try { return JSON.parse(localStorage.getItem(SAVED_KEY)) || []; }
+    catch { return []; }
+  }
+
+  function updateSaveBtn() {
+    const isSaved = getSavedList().includes(key);
+    const icon = document.getElementById('save-icon');
+    icon.style.fontVariationSettings = isSaved
+      ? "'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24"
+      : "'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24";
+    icon.style.color = isSaved ? '#390663' : '';
+  }
+
+  function toggleSave() {
+    const list = getSavedList();
+    const idx = list.indexOf(key);
+    const adding = idx === -1;
+    if (adding) list.push(key); else list.splice(idx, 1);
+    localStorage.setItem(SAVED_KEY, JSON.stringify(list));
+    updateSaveBtn();
+    showSaveToast(adding ? 'Added to Saved' : 'Removed from Saved');
+  }
+
+  function showSaveToast(msg) {
+    const el = document.createElement('div');
+    el.textContent = msg;
+    el.style.cssText = 'position:fixed;top:76px;left:50%;transform:translateX(-50%);z-index:60;background:#1e1a20;color:#fff7fd;font-size:13px;font-weight:600;padding:8px 16px;border-radius:9999px;box-shadow:0 4px 12px rgba(0,0,0,0.2);opacity:0;transition:opacity 0.2s;white-space:nowrap';
+    document.body.appendChild(el);
+    requestAnimationFrame(() => { el.style.opacity = '1'; });
+    setTimeout(() => { el.style.opacity = '0'; setTimeout(() => el.remove(), 200); }, 1800);
+  }
+
+  updateSaveBtn();
 
 </script>
 
