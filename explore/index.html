@@ -12,6 +12,9 @@
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Be+Vietnam+Pro:wght@400;500;700&display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<!-- Leaflet -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script id="tailwind-config">
   tailwind.config = {
     darkMode: "class",
@@ -56,23 +59,67 @@
   }
 </script>
 <style>
-  html { min-height: 100%; background: #fff7fd; }
+  html, body { height: 100%; margin: 0; background: #fff7fd; overflow: hidden; }
   .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
-  .map-gradient-overlay {
-    background: linear-gradient(to bottom, rgba(255,247,253,0.9) 0%, rgba(255,247,253,0) 15%, rgba(255,247,253,0) 70%, rgba(255,247,253,0.9) 100%);
-    pointer-events: none;
-  }
-  body { min-height: 100svh; min-height: 100dvh; background: #fff7fd; }
-  .app-shell { height: 100svh; height: 100dvh; }
+  .app-shell { height: 100svh; height: 100dvh; position: relative; }
 
-  /* Map zoom container */
-  #map-zoom-container {
-    transform-origin: center center;
-    transition: transform 0.22s ease-out;
-    will-change: transform;
+  /* Leaflet map fills between header (64px) and nav (80px) */
+  #map {
+    position: absolute;
+    top: 64px;
+    bottom: 80px;
+    left: 0;
+    right: 0;
+    z-index: 0;
   }
 
-  /* Location card slide-up */
+  /* Custom pin styles */
+  .eb-pin-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .eb-pin {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    border: 3px solid white;
+    box-shadow: 0 4px 12px rgba(57, 6, 99, 0.28);
+    transition: transform 0.15s ease;
+    width: 36px;
+    height: 36px;
+    cursor: pointer;
+  }
+  .eb-pin:active { transform: scale(1.15); }
+  .eb-pin-primary {
+    background: #390663;
+    color: white;
+    border-width: 4px;
+    width: 42px;
+    height: 42px;
+    box-shadow: 0 6px 16px rgba(57, 6, 99, 0.35);
+  }
+  .eb-pin-secondary {
+    background: #edd4fe;
+    color: #51247a;
+  }
+  .eb-pin .material-symbols-outlined {
+    font-size: 18px;
+    font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+  }
+  .eb-pin-primary .material-symbols-outlined { font-size: 20px; }
+  .eb-tail { width: 2px; height: 10px; background: rgba(255,255,255,0.75); }
+
+  /* Leaflet attribution tweak */
+  .leaflet-control-attribution {
+    font-size: 9px !important;
+    opacity: 0.65;
+    background: rgba(255,255,255,0.7) !important;
+  }
+  .leaflet-attribution-flag { display: none !important; }
+
+  /* Location card animation */
   #location-card {
     transition: opacity 0.2s ease, transform 0.22s ease;
   }
@@ -88,7 +135,7 @@
   }
 </style>
 </head>
-<body class="bg-background text-on-background font-body-md overflow-hidden">
+<body class="bg-background text-on-background font-body-md">
 
 <!-- TopAppBar -->
 <header class="fixed top-0 w-full z-50 bg-white/92 border-b border-purple-100/40 shadow-[0_2px_12px_rgba(81,36,122,0.05)] flex justify-between items-center px-5 h-16">
@@ -106,89 +153,13 @@
   </div>
 </header>
 
-<!-- Main Canvas: Map View -->
-<main class="app-shell relative w-full pt-16 pb-20 overflow-hidden" id="map-outer" onclick="handleMapClick(event)">
+<!-- Main canvas -->
+<main class="app-shell w-full" id="map-outer">
 
-  <!-- Zoomable map layer: image + gradient + ALL pins -->
-  <div id="map-zoom-container" class="absolute inset-0 z-0">
-    <img alt="Map of UQ St Lucia area" class="absolute inset-0 w-full h-full object-cover grayscale-[20%] contrast-[90%] brightness-[105%]" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBTzAnJTTG0XF_t-wavkkz30H1mGC7K3JxPGaGIb1UXwQ1CGxdsMmkMBwuiJkUrY2dhOQVVW4tgA6i_KmL1hVaITP4mXqKZVVpMSSiF9bD57HvIFD7VxpeQOTmzEaVks6GwrP-3TuXR7YyE48DZUz0027nS5Iwpam6jmq_TYOOxTPpHSl930AIbevA7OR_crdnSy4Dsy_Dza3zYyWeSIQ8KLr1vGPK5vyoN51aGhwG4c67lm024jeXR9vqiJE3Q_h4WK8EvWnzGAu6z"/>
-    <div class="absolute inset-0 map-gradient-overlay"></div>
+  <!-- Leaflet interactive map -->
+  <div id="map"></div>
 
-    <!-- Primary: UQ Food Chains — opens card on click -->
-    <button onclick="showCard(event)" class="absolute top-[52%] left-[48%] -translate-x-1/2 -translate-y-1/2 z-20 block cursor-pointer bg-transparent border-none p-0">
-      <div class="flex flex-col items-center">
-        <div class="bg-primary shadow-[0_4px_12px_rgba(57,6,99,0.3)] text-white p-2 rounded-full border-4 border-white active:scale-110 transition-transform duration-150">
-          <span class="material-symbols-outlined text-[20px]" style="font-variation-settings:'FILL' 1;">restaurant</span>
-        </div>
-        <div class="w-0.5 h-3 bg-white/80 shadow-sm"></div>
-      </div>
-    </button>
-
-    <!-- Coffee Shop -->
-    <a href="/meal" class="absolute top-[40%] left-[30%] -translate-x-1/2 -translate-y-1/2 z-20 block">
-      <div class="flex flex-col items-center opacity-80">
-        <div class="bg-secondary-container shadow-md text-primary-container p-2 rounded-full border-2 border-white active:scale-110 transition-transform duration-150">
-          <span class="material-symbols-outlined text-[18px]">coffee</span>
-        </div>
-      </div>
-    </a>
-
-    <!-- Bakery -->
-    <a href="/meal" class="absolute top-[65%] left-[65%] -translate-x-1/2 -translate-y-1/2 z-20 block">
-      <div class="flex flex-col items-center opacity-80">
-        <div class="bg-secondary-container shadow-md text-primary-container p-2 rounded-full border-2 border-white active:scale-110 transition-transform duration-150">
-          <span class="material-symbols-outlined text-[18px]">bakery_dining</span>
-        </div>
-      </div>
-    </a>
-
-    <!-- Ramen / Noodle Bar -->
-    <a href="/meal" class="absolute top-[36%] left-[57%] -translate-x-1/2 -translate-y-1/2 z-20 block">
-      <div class="flex flex-col items-center opacity-80">
-        <div class="bg-secondary-container shadow-md text-primary-container p-2 rounded-full border-2 border-white active:scale-110 transition-transform duration-150">
-          <span class="material-symbols-outlined text-[18px]">ramen_dining</span>
-        </div>
-      </div>
-    </a>
-
-    <!-- Burger / Lunch -->
-    <a href="/meal" class="absolute top-[58%] left-[33%] -translate-x-1/2 -translate-y-1/2 z-20 block">
-      <div class="flex flex-col items-center opacity-80">
-        <div class="bg-secondary-container shadow-md text-primary-container p-2 rounded-full border-2 border-white active:scale-110 transition-transform duration-150">
-          <span class="material-symbols-outlined text-[18px]">lunch_dining</span>
-        </div>
-      </div>
-    </a>
-
-    <!-- Pizza -->
-    <a href="/meal" class="absolute top-[72%] left-[44%] -translate-x-1/2 -translate-y-1/2 z-20 block">
-      <div class="flex flex-col items-center opacity-80">
-        <div class="bg-secondary-container shadow-md text-primary-container p-2 rounded-full border-2 border-white active:scale-110 transition-transform duration-150">
-          <span class="material-symbols-outlined text-[18px]">local_pizza</span>
-        </div>
-      </div>
-    </a>
-
-    <!-- Fast Food -->
-    <a href="/meal" class="absolute top-[44%] left-[70%] -translate-x-1/2 -translate-y-1/2 z-20 block">
-      <div class="flex flex-col items-center opacity-80">
-        <div class="bg-secondary-container shadow-md text-primary-container p-2 rounded-full border-2 border-white active:scale-110 transition-transform duration-150">
-          <span class="material-symbols-outlined text-[18px]">fastfood</span>
-        </div>
-      </div>
-    </a>
-
-    <!-- Set Meal / Asian Kitchen -->
-    <a href="/meal" class="absolute top-[28%] left-[43%] -translate-x-1/2 -translate-y-1/2 z-20 block">
-      <div class="flex flex-col items-center opacity-80">
-        <div class="bg-secondary-container shadow-md text-primary-container p-2 rounded-full border-2 border-white active:scale-110 transition-transform duration-150">
-          <span class="material-symbols-outlined text-[18px]">set_meal</span>
-        </div>
-      </div>
-    </a>
-  </div>
-
-  <!-- Search Bar (outside zoom) -->
+  <!-- Search Bar (floats over map) -->
   <div class="absolute top-[76px] left-1/2 -translate-x-1/2 w-[90%] max-w-sm z-10">
     <div class="relative">
       <div class="absolute inset-y-0 left-4 flex items-center pointer-events-none">
@@ -201,21 +172,11 @@
     </div>
   </div>
 
-  <!-- Zoom Controls (outside zoom) -->
-  <div class="absolute right-4 top-1/2 -translate-y-1/2 z-20 flex flex-col gap-2">
-    <button onclick="zoomIn(event)" class="w-9 h-9 bg-white/95 rounded-full shadow-[0_2px_10px_rgba(81,36,122,0.15)] flex items-center justify-center text-primary font-bold text-lg hover:bg-purple-50 active:scale-90 transition-all border border-white/60">
-      <span class="material-symbols-outlined text-[20px]">add</span>
-    </button>
-    <button onclick="zoomOut(event)" class="w-9 h-9 bg-white/95 rounded-full shadow-[0_2px_10px_rgba(81,36,122,0.15)] flex items-center justify-center text-primary font-bold text-lg hover:bg-purple-50 active:scale-90 transition-all border border-white/60">
-      <span class="material-symbols-outlined text-[20px]">remove</span>
-    </button>
-  </div>
-
-  <!-- Featured Card (hidden by default, toggled by restaurant pin) -->
+  <!-- Location Card (hidden by default) -->
   <div id="location-card" class="card-hidden absolute bottom-24 left-0 w-full px-4 z-30">
     <div class="relative bg-white/96 rounded-[16px] shadow-[0_14px_32px_rgba(81,36,122,0.12)] overflow-hidden flex flex-col max-w-[380px] mx-auto border border-white/70">
       <!-- Close button -->
-      <button onclick="hideCard(event)" class="absolute top-2 right-2 z-10 w-7 h-7 bg-black/20 hover:bg-black/30 rounded-full flex items-center justify-center transition-colors active:scale-90">
+      <button onclick="hideCard()" class="absolute top-2 right-2 z-10 w-7 h-7 bg-black/20 hover:bg-black/30 rounded-full flex items-center justify-center transition-colors active:scale-90">
         <span class="material-symbols-outlined text-white text-[16px]">close</span>
       </button>
       <div class="h-16 relative flex-shrink-0">
@@ -270,72 +231,100 @@
 </nav>
 
 <script>
-  const card = document.getElementById('location-card');
-  const zoomEl = document.getElementById('map-zoom-container');
-  let zoom = 1;
-  const ZOOM_STEP = 0.35;
-  const MIN_ZOOM = 1;
-  const MAX_ZOOM = 3;
+  /* ── Leaflet map ── */
+  const map = L.map('map', {
+    center: [-27.4975, 153.0137],
+    zoom: 17,
+    zoomControl: false,        // no default ± buttons; use pinch / scroll
+    attributionControl: true,
+    tap: true,                 // better mobile tap handling
+  });
 
-  function showCard(e) {
-    e.stopPropagation();
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+    attribution: '&copy; <a href="https://openstreetmap.org/copyright">OSM</a> &copy; <a href="https://carto.com/">CARTO</a>',
+    maxZoom: 20,
+    subdomains: 'abcd',
+  }).addTo(map);
+
+  /* ── Custom icon builder ── */
+  function makeIcon(iconName, primary) {
+    const size   = primary ? 42 : 36;
+    const anchor = primary ? size + 12 : size;
+    const html = `
+      <div class="eb-pin-wrap">
+        <div class="eb-pin ${primary ? 'eb-pin-primary' : 'eb-pin-secondary'}">
+          <span class="material-symbols-outlined">${iconName}</span>
+        </div>
+        ${primary ? '<div class="eb-tail"></div>' : ''}
+      </div>`;
+    return L.divIcon({
+      html,
+      className: '',
+      iconSize:   [size, anchor],
+      iconAnchor: [size / 2, anchor],
+    });
+  }
+
+  /* ── Pin data (UQ St Lucia + surrounds) ── */
+  const pins = [
+    // Primary — shows the card
+    { lat: -27.4975, lng: 153.0137, icon: 'restaurant',    primary: true  },
+
+    // UQ core campus
+    { lat: -27.4962, lng: 153.0148, icon: 'coffee'         },
+    { lat: -27.4988, lng: 153.0155, icon: 'bakery_dining'  },
+    { lat: -27.4972, lng: 153.0110, icon: 'ramen_dining'   },
+    { lat: -27.4984, lng: 153.0128, icon: 'lunch_dining'   },
+    { lat: -27.4955, lng: 153.0140, icon: 'local_pizza'    },
+    { lat: -27.4993, lng: 153.0143, icon: 'fastfood'       },
+    { lat: -27.4967, lng: 153.0162, icon: 'set_meal'       },
+
+    // Further around campus
+    { lat: -27.4978, lng: 153.0099, icon: 'coffee'         },
+    { lat: -27.5002, lng: 153.0120, icon: 'bakery_dining'  },
+    { lat: -27.4948, lng: 153.0126, icon: 'local_cafe'     },
+    { lat: -27.4959, lng: 153.0172, icon: 'ramen_dining'   },
+    { lat: -27.5007, lng: 153.0138, icon: 'lunch_dining'   },
+    { lat: -27.4951, lng: 153.0100, icon: 'fastfood'       },
+    { lat: -27.4942, lng: 153.0151, icon: 'local_pizza'    },
+    { lat: -27.4933, lng: 153.0131, icon: 'set_meal'       },
+    { lat: -27.5014, lng: 153.0155, icon: 'coffee'         },
+    { lat: -27.4938, lng: 153.0113, icon: 'bakery_dining'  },
+    { lat: -27.5020, lng: 153.0108, icon: 'ramen_dining'   },
+    { lat: -27.4928, lng: 153.0162, icon: 'fastfood'       },
+  ];
+
+  pins.forEach(({ lat, lng, icon, primary }) => {
+    const marker = L.marker([lat, lng], { icon: makeIcon(icon, !!primary) }).addTo(map);
+
+    if (primary) {
+      marker.on('click', (e) => {
+        L.DomEvent.stopPropagation(e);
+        showCard();
+      });
+    } else {
+      marker.on('click', (e) => {
+        L.DomEvent.stopPropagation(e);
+        window.location.href = '/meal';
+      });
+    }
+  });
+
+  /* Clicking bare map closes the card */
+  map.on('click', hideCard);
+
+  /* ── Card toggle ── */
+  const card = document.getElementById('location-card');
+
+  function showCard() {
     card.classList.remove('card-hidden');
     card.classList.add('card-visible');
   }
 
-  function hideCard(e) {
-    e.stopPropagation();
+  function hideCard() {
     card.classList.remove('card-visible');
     card.classList.add('card-hidden');
   }
-
-  function handleMapClick(e) {
-    if (card.classList.contains('card-visible')) {
-      card.classList.remove('card-visible');
-      card.classList.add('card-hidden');
-    }
-  }
-
-  function applyZoom() {
-    zoomEl.style.transform = zoom === 1 ? '' : `scale(${zoom})`;
-  }
-
-  function zoomIn(e) {
-    e.stopPropagation();
-    zoom = Math.min(zoom + ZOOM_STEP, MAX_ZOOM);
-    applyZoom();
-  }
-
-  function zoomOut(e) {
-    e.stopPropagation();
-    zoom = Math.max(zoom - ZOOM_STEP, MIN_ZOOM);
-    applyZoom();
-  }
-
-  /* Pinch-to-zoom on touch devices */
-  let initDist = 0;
-  let initZoom = 1;
-
-  document.getElementById('map-outer').addEventListener('touchstart', (e) => {
-    if (e.touches.length === 2) {
-      initDist = Math.hypot(
-        e.touches[1].clientX - e.touches[0].clientX,
-        e.touches[1].clientY - e.touches[0].clientY
-      );
-      initZoom = zoom;
-    }
-  }, { passive: true });
-
-  document.getElementById('map-outer').addEventListener('touchmove', (e) => {
-    if (e.touches.length === 2) {
-      const dist = Math.hypot(
-        e.touches[1].clientX - e.touches[0].clientX,
-        e.touches[1].clientY - e.touches[0].clientY
-      );
-      zoom = Math.min(Math.max(initZoom * (dist / initDist), MIN_ZOOM), MAX_ZOOM);
-      applyZoom();
-    }
-  }, { passive: true });
 </script>
 
 </body>
