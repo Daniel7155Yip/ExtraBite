@@ -66,8 +66,27 @@
     background: #fff7fd;
   }
   .page-shell {
-    padding-bottom: calc(7.5rem + env(safe-area-inset-bottom));
+    padding-bottom: calc(10rem + env(safe-area-inset-bottom));
   }
+
+  /* Claim modal */
+  #claim-backdrop {
+    transition: opacity 0.25s ease;
+  }
+  #claim-sheet {
+    transition: transform 0.32s cubic-bezier(0.32, 0.72, 0, 1);
+  }
+  #claim-sheet.translate-y-full { transform: translateY(100%); }
+
+  /* Countdown colour */
+  .timer-urgent { color: #ba1a1a; }
+
+  /* QR pulse when urgent */
+  @keyframes qr-pulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(186,26,26,0.4); }
+    50%       { box-shadow: 0 0 0 10px rgba(186,26,26,0); }
+  }
+  .qr-urgent { animation: qr-pulse 1s ease infinite; }
 </style>
 </head>
 <body class="bg-surface-bright text-on-background font-body-md">
@@ -207,6 +226,96 @@
   </section>
 </main>
 
+<!-- ── Fixed bottom CTA bar ── -->
+<div class="fixed bottom-0 left-0 w-full z-40 bg-white/95 backdrop-blur-lg border-t border-purple-100 px-5 pt-4 shadow-[0_-8px_24px_rgba(81,36,122,0.1)]" style="padding-bottom: max(20px, env(safe-area-inset-bottom))">
+  <div class="flex items-center gap-4 mb-2">
+    <div class="flex flex-col leading-none">
+      <span class="text-[11px] text-outline line-through">$18.50</span>
+      <span class="text-[26px] font-extrabold text-primary font-['Plus_Jakarta_Sans']">$7.50</span>
+    </div>
+    <button id="claim-btn" onclick="openClaim()"
+      class="flex-1 h-14 bg-primary text-white rounded-full font-['Plus_Jakarta_Sans'] font-bold text-[15px] flex items-center justify-center gap-2 shadow-[0_8px_24px_rgba(57,6,99,0.28)] active:scale-95 transition-all">
+      <span class="material-symbols-outlined text-[20px]" style="font-variation-settings:'FILL' 1;">bolt</span>
+      Claim Mystery Meal
+    </button>
+  </div>
+  <p class="text-center text-[11px] text-on-surface-variant flex items-center justify-center gap-1 pb-1">
+    <span class="material-symbols-outlined text-[13px]">schedule</span>
+    Pickup window closes at 8:00 PM today
+  </p>
+</div>
+
+<!-- ── Claim modal (bottom sheet) ── -->
+<div id="claim-backdrop" class="fixed inset-0 z-50 flex items-end justify-center opacity-0 pointer-events-none">
+  <!-- dark overlay -->
+  <div class="absolute inset-0 bg-black/55 backdrop-blur-sm" onclick="closeClaim()"></div>
+
+  <!-- sheet -->
+  <div id="claim-sheet" class="relative w-full max-w-md bg-[#fff7fd] rounded-t-[28px] overflow-hidden translate-y-full"
+    style="padding-bottom: max(28px, env(safe-area-inset-bottom))">
+
+    <!-- drag handle -->
+    <div class="flex justify-center pt-3 pb-1">
+      <div class="w-10 h-1 bg-outline-variant rounded-full"></div>
+    </div>
+
+    <!-- close button -->
+    <button onclick="closeClaim()" class="absolute top-4 right-4 w-8 h-8 flex items-center justify-center rounded-full bg-surface-container-high hover:bg-surface-container-highest active:scale-90 transition-all">
+      <span class="material-symbols-outlined text-on-surface-variant text-[18px]">close</span>
+    </button>
+
+    <!-- success header -->
+    <div class="flex flex-col items-center px-6 pt-2 pb-4">
+      <div class="w-14 h-14 rounded-full bg-[#1B5E20]/10 flex items-center justify-center mb-3">
+        <span class="material-symbols-outlined text-[32px] text-[#2E7D32]" style="font-variation-settings:'FILL' 1;">check_circle</span>
+      </div>
+      <h2 class="font-['Plus_Jakarta_Sans'] font-extrabold text-[22px] text-on-surface">Claim Meal Now!</h2>
+      <p id="modal-location" class="text-[13px] text-on-surface-variant mt-0.5">UQ Food Chains</p>
+    </div>
+
+    <!-- QR code -->
+    <div class="flex flex-col items-center px-6 pb-5">
+      <div id="qr-wrapper" class="rounded-2xl border-4 border-primary/20 p-3 bg-white shadow-[0_4px_20px_rgba(81,36,122,0.12)] mb-2">
+        <img id="qr-img"
+          class="w-44 h-44 rounded-lg"
+          src="" alt="Pickup QR code"/>
+      </div>
+      <p id="order-ref" class="text-[11px] font-mono text-outline tracking-wide"></p>
+    </div>
+
+    <!-- countdown -->
+    <div class="mx-6 bg-surface-container-low rounded-2xl px-5 py-4 mb-4">
+      <div class="flex items-center justify-between mb-2">
+        <div class="flex items-center gap-2">
+          <span class="material-symbols-outlined text-[18px] text-primary" style="font-variation-settings:'FILL' 1;">timer</span>
+          <span class="text-[13px] font-semibold text-on-surface-variant">Expires in</span>
+        </div>
+        <span id="countdown-display" class="font-['Plus_Jakarta_Sans'] font-extrabold text-[28px] text-primary tabular-nums leading-none">5:00</span>
+      </div>
+      <!-- thin progress bar -->
+      <div class="h-2 w-full bg-surface-container-highest rounded-full overflow-hidden">
+        <div id="countdown-bar" class="h-full bg-primary rounded-full transition-all duration-1000" style="width:100%"></div>
+      </div>
+    </div>
+
+    <!-- instructions -->
+    <p class="text-center text-[12px] text-on-surface-variant px-8 leading-relaxed">
+      Show this QR code to staff at the collection point.<br/>
+      <span class="font-semibold text-on-surface">Union Complex, Ground Floor, St Lucia.</span>
+    </p>
+
+    <!-- expired overlay (hidden) -->
+    <div id="expired-overlay" class="hidden absolute inset-0 bg-[#fff7fd]/95 flex flex-col items-center justify-center gap-3 rounded-t-[28px]">
+      <span class="material-symbols-outlined text-[48px] text-error" style="font-variation-settings:'FILL' 1;">cancel</span>
+      <p class="font-['Plus_Jakarta_Sans'] font-bold text-[20px] text-error">QR Code Expired</p>
+      <p class="text-[13px] text-on-surface-variant text-center px-8">This code has expired. Tap below to generate a new one.</p>
+      <button onclick="resetClaim()" class="mt-2 bg-primary text-white px-6 py-3 rounded-full font-bold text-[14px] active:scale-95 transition-all">
+        Generate New Code
+      </button>
+    </div>
+  </div>
+</div>
+
 <script>
   const mealConfigs = {
     'uq-food-chains': {
@@ -334,6 +443,89 @@
 
   sections[4].querySelector('img').src = config.peekImage;
   sections[4].querySelector('img').alt = `${config.locationTitle} interior`;
+
+  /* ── Claim modal ── */
+  let countdownTimer  = null;
+  let secondsLeft     = 300;
+  const TOTAL_SECONDS = 300;
+
+  const backdrop   = document.getElementById('claim-backdrop');
+  const sheet      = document.getElementById('claim-sheet');
+  const display    = document.getElementById('countdown-display');
+  const bar        = document.getElementById('countdown-bar');
+  const expiredEl  = document.getElementById('expired-overlay');
+  const qrImg      = document.getElementById('qr-img');
+  const qrWrapper  = document.getElementById('qr-wrapper');
+  const orderRef   = document.getElementById('order-ref');
+
+  function openClaim() {
+    // Generate a fresh order ID
+    const id = 'EB-' + Date.now().toString(36).toUpperCase().slice(-6);
+    orderRef.textContent = 'Order ' + id;
+    document.getElementById('modal-location').textContent = config.locationTitle;
+
+    // QR code via free API — encodes the order ID
+    qrImg.src = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&margin=10&data=${encodeURIComponent('EXTRABITE:' + id)}`;
+
+    // Reset state
+    expiredEl.classList.add('hidden');
+    expiredEl.style.display = '';
+    qrImg.style.opacity = '1';
+    display.classList.remove('timer-urgent');
+    bar.style.background = '';
+    qrWrapper.classList.remove('qr-urgent');
+
+    // Show modal
+    backdrop.style.opacity  = '1';
+    backdrop.style.pointerEvents = 'auto';
+    sheet.classList.remove('translate-y-full');
+
+    // Start countdown
+    secondsLeft = TOTAL_SECONDS;
+    updateCountdown();
+    clearInterval(countdownTimer);
+    countdownTimer = setInterval(tick, 1000);
+  }
+
+  function closeClaim() {
+    backdrop.style.opacity  = '0';
+    backdrop.style.pointerEvents = 'none';
+    sheet.classList.add('translate-y-full');
+    clearInterval(countdownTimer);
+  }
+
+  function tick() {
+    secondsLeft--;
+    updateCountdown();
+    if (secondsLeft <= 0) {
+      clearInterval(countdownTimer);
+      showExpired();
+    }
+  }
+
+  function updateCountdown() {
+    const m = Math.floor(secondsLeft / 60);
+    const s = secondsLeft % 60;
+    display.textContent = `${m}:${s.toString().padStart(2, '0')}`;
+    bar.style.width = `${(secondsLeft / TOTAL_SECONDS) * 100}%`;
+
+    // Turn urgent (red) in last 60 seconds
+    const urgent = secondsLeft <= 60;
+    display.classList.toggle('timer-urgent', urgent);
+    bar.style.background = urgent ? '#ba1a1a' : '';
+    qrWrapper.classList.toggle('qr-urgent', urgent);
+  }
+
+  function showExpired() {
+    expiredEl.classList.remove('hidden');
+    expiredEl.style.display = 'flex';
+  }
+
+  function resetClaim() {
+    closeClaim();
+    // Brief pause then reopen with fresh code
+    setTimeout(openClaim, 400);
+  }
 
 </script>
 
