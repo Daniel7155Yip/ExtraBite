@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport"/>
+<title>Extra Bite — Saved</title>
+<meta name="theme-color" content="#390663"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+<meta name="apple-mobile-web-app-title" content="Extra Bite"/>
+<link rel="manifest" href="/manifest.json"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Be+Vietnam+Pro:wght@400;500;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        colors: {
+          "surface-container-highest": "#e8e0e8", "surface-variant": "#e8e0e8",
+          "secondary-container": "#edd4fe", "surface-container-high": "#eee6ee",
+          "primary-container": "#51247a", "on-primary-fixed-variant": "#5d3186",
+          "surface-container-lowest": "#ffffff", "on-tertiary": "#ffffff",
+          "on-secondary-fixed-variant": "#523f61", "surface-container-low": "#faf1f9",
+          "on-surface-variant": "#4b4450", "on-secondary-fixed": "#251433",
+          "on-surface": "#1e1a20", "inverse-primary": "#ddb7ff", "surface-bright": "#fff7fd",
+          "on-primary": "#ffffff", "primary": "#390663", "surface-tint": "#764aa0",
+          "on-background": "#1e1a20", "surface-container": "#f4ebf3",
+          "tertiary-container": "#503700", "secondary-fixed-dim": "#d6bee7",
+          "error": "#ba1a1a", "tertiary-fixed": "#ffdea9", "outline": "#7d7481",
+          "inverse-surface": "#332f35", "tertiary-fixed-dim": "#e8c17e",
+          "on-error": "#ffffff", "inverse-on-surface": "#f7eef6", "surface": "#fff7fd",
+          "on-primary-fixed": "#2c0050", "on-primary-container": "#c192ee",
+          "on-error-container": "#93000a", "on-secondary": "#ffffff",
+          "outline-variant": "#cec3d1", "error-container": "#ffdad6",
+          "on-tertiary-fixed": "#271900", "primary-fixed": "#f0dbff",
+          "on-secondary-container": "#6d597d", "on-tertiary-container": "#c5a061",
+          "surface-dim": "#e0d7df", "secondary": "#6a577a", "tertiary": "#342300",
+          "background": "#fff7fd", "primary-fixed-dim": "#ddb7ff"
+        },
+        borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+        spacing: { "lg": "40px", "xl": "64px", "md": "24px", "base": "8px", "sm": "12px", "gutter": "16px", "xs": "4px", "container-padding": "20px" },
+        fontFamily: { "headline-xl": ["Plus Jakarta Sans"], "headline-lg": ["Plus Jakarta Sans"], "label-bold": ["Be Vietnam Pro"], "body-md": ["Be Vietnam Pro"], "label-sm": ["Be Vietnam Pro"], "headline-md": ["Plus Jakarta Sans"], "body-lg": ["Be Vietnam Pro"] },
+        fontSize: {
+          "headline-xl": ["40px", { lineHeight: "1.2", letterSpacing: "-0.02em", fontWeight: "800" }],
+          "headline-lg": ["32px", { lineHeight: "1.3", letterSpacing: "-0.01em", fontWeight: "700" }],
+          "label-bold": ["14px", { lineHeight: "1.2", fontWeight: "700" }],
+          "body-md": ["16px", { lineHeight: "1.5", fontWeight: "400" }],
+          "label-sm": ["12px", { lineHeight: "1.2", fontWeight: "500" }],
+          "headline-md": ["24px", { lineHeight: "1.4", fontWeight: "700" }],
+          "body-lg": ["18px", { lineHeight: "1.6", fontWeight: "400" }]
+        }
+      }
+    }
+  }
+</script>
+<style>
+  html { min-height: 100%; background: #fff7fd; }
+  .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+  body { min-height: 100svh; min-height: 100dvh; background: #fff7fd; }
+  .page-shell { padding-bottom: calc(7rem + env(safe-area-inset-bottom)); }
+
+  /* Bookmark toggle animation */
+  .bookmark-btn .material-symbols-outlined {
+    transition: font-variation-settings 0.15s ease, color 0.15s ease;
+  }
+  .bookmark-btn.saved .material-symbols-outlined {
+    font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    color: #390663;
+  }
+  .bookmark-btn:not(.saved) .material-symbols-outlined {
+    font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    color: #7d7481;
+  }
+</style>
+</head>
+<body class="bg-background text-on-background font-body-md">
+
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-white/90 backdrop-blur-md border-b border-purple-100/20 shadow-[0_4px_20px_rgba(81,36,122,0.05)] flex justify-between items-center px-5 h-16">
+  <div class="flex items-center gap-3">
+    <span class="material-symbols-outlined text-purple-900">eco</span>
+    <h1 class="font-['Plus_Jakarta_Sans'] font-extrabold text-xl tracking-tight text-purple-900 italic">Extra Bite</h1>
+  </div>
+  <a href="/profile" class="w-10 h-10 rounded-full overflow-hidden border-2 border-primary-fixed shadow-sm block">
+    <img alt="User profile photo" class="w-full h-full object-cover" src="/photos/simple-user-default-icon-free-png.webp"/>
+  </a>
+</header>
+
+<main class="page-shell pt-24 px-container-padding space-y-md">
+
+  <!-- Page title -->
+  <div class="flex flex-col gap-xs">
+    <h2 class="font-headline-lg text-headline-lg text-primary">Saved</h2>
+    <p class="font-body-md text-label-bold text-on-surface-variant">Your favourite food rescue spots.</p>
+  </div>
+
+  <!-- Saved location cards -->
+  <section class="space-y-gutter">
+
+    <!-- UQ Food Chains -->
+    <div class="bg-white/80 backdrop-blur-sm rounded-2xl shadow-[0_4px_20px_rgba(81,36,122,0.07)] border border-surface-container-highest overflow-hidden">
+      <!-- Photo banner -->
+      <div class="relative h-32 w-full">
+        <img src="/photos/pic-1.jpg" alt="UQ Food Chains" class="w-full h-full object-cover"/>
+        <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
+        <!-- Bookmark button -->
+        <button onclick="toggleSave(this)" class="bookmark-btn saved absolute top-3 right-3 w-9 h-9 bg-white/90 rounded-full flex items-center justify-center shadow-md active:scale-90 transition-transform">
+          <span class="material-symbols-outlined text-[20px]">bookmark</span>
+        </button>
+        <!-- Rating badge -->
+        <div class="absolute bottom-3 left-3 flex items-center gap-1 bg-white/90 px-2 py-0.5 rounded-full shadow-sm">
+          <span class="material-symbols-outlined text-[13px] text-amber-500" style="font-variation-settings:'FILL' 1;">star</span>
+          <span class="text-[12px] font-bold text-on-surface">4.8</span>
+        </div>
+      </div>
+      <!-- Card body -->
+      <div class="p-md">
+        <div class="flex items-start justify-between gap-3 mb-1">
+          <div>
+            <h3 class="font-['Plus_Jakarta_Sans'] font-bold text-[16px] text-on-surface">UQ Food Chains</h3>
+            <p class="text-[12px] text-on-surface-variant flex items-center gap-1 mt-0.5">
+              <span class="material-symbols-outlined text-[13px]">location_on</span>
+              Union Complex, Ground Floor, St Lucia
+            </p>
+          </div>
+          <!-- Purchase count -->
+          <div class="flex flex-col items-center flex-shrink-0 bg-secondary-container rounded-xl px-3 py-1.5">
+            <span class="text-[18px] font-extrabold font-['Plus_Jakarta_Sans'] text-primary leading-none">3</span>
+            <span class="text-[10px] font-semibold text-on-secondary-container leading-tight">purchases</span>
+          </div>
+        </div>
+        <!-- Last visited + CTA -->
+        <div class="flex items-center justify-between mt-3 pt-3 border-t border-surface-container">
+          <p class="text-[11px] text-outline flex items-center gap-1">
+            <span class="material-symbols-outlined text-[13px]">schedule</span>
+            Last visited Oct 12, 2023
+          </p>
+          <a href="/meal" class="bg-primary text-on-primary px-4 py-1.5 rounded-full text-[12px] font-label-bold shadow-[0_4px_12px_rgba(57,6,99,0.2)] active:scale-95 transition-all flex items-center gap-1 no-underline">
+            Claim Bite
+            <span class="material-symbols-outlined text-[14px]">bolt</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Brisbane CBD Food Court -->
+    <div class="bg-white/80 backdrop-blur-sm rounded-2xl shadow-[0_4px_20px_rgba(81,36,122,0.07)] border border-surface-container-highest overflow-hidden">
+      <div class="relative h-32 w-full">
+        <img src="/photos/Brisbane CBD Food court.jpg" alt="Brisbane CBD Food Court" class="w-full h-full object-cover"/>
+        <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
+        <button onclick="toggleSave(this)" class="bookmark-btn saved absolute top-3 right-3 w-9 h-9 bg-white/90 rounded-full flex items-center justify-center shadow-md active:scale-90 transition-transform">
+          <span class="material-symbols-outlined text-[20px]">bookmark</span>
+        </button>
+        <div class="absolute bottom-3 left-3 flex items-center gap-1 bg-white/90 px-2 py-0.5 rounded-full shadow-sm">
+          <span class="material-symbols-outlined text-[13px] text-amber-500" style="font-variation-settings:'FILL' 1;">star</span>
+          <span class="text-[12px] font-bold text-on-surface">4.7</span>
+        </div>
+      </div>
+      <div class="p-md">
+        <div class="flex items-start justify-between gap-3 mb-1">
+          <div>
+            <h3 class="font-['Plus_Jakarta_Sans'] font-bold text-[16px] text-on-surface">Brisbane CBD Food Court</h3>
+            <p class="text-[12px] text-on-surface-variant flex items-center gap-1 mt-0.5">
+              <span class="material-symbols-outlined text-[13px]">location_on</span>
+              Wintergarden, Queen St Mall, Brisbane
+            </p>
+          </div>
+          <div class="flex flex-col items-center flex-shrink-0 bg-secondary-container rounded-xl px-3 py-1.5">
+            <span class="text-[18px] font-extrabold font-['Plus_Jakarta_Sans'] text-primary leading-none">2</span>
+            <span class="text-[10px] font-semibold text-on-secondary-container leading-tight">purchases</span>
+          </div>
+        </div>
+        <div class="flex items-center justify-between mt-3 pt-3 border-t border-surface-container">
+          <p class="text-[11px] text-outline flex items-center gap-1">
+            <span class="material-symbols-outlined text-[13px]">schedule</span>
+            Last visited Oct 02, 2023
+          </p>
+          <a href="/meal" class="bg-primary text-on-primary px-4 py-1.5 rounded-full text-[12px] font-label-bold shadow-[0_4px_12px_rgba(57,6,99,0.2)] active:scale-95 transition-all flex items-center gap-1 no-underline">
+            Claim Bite
+            <span class="material-symbols-outlined text-[14px]">bolt</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+  </section>
+</main>
+
+<!-- Bottom Navigation Bar -->
+<nav class="fixed bottom-0 left-0 w-full h-20 bg-white/95 backdrop-blur-lg border-t border-purple-100 shadow-[0_-4px_24px_rgba(81,36,122,0.08)] flex justify-around items-center px-4 z-50 rounded-t-2xl" style="padding-bottom: max(12px, env(safe-area-inset-bottom))">
+  <a href="/explore" class="flex flex-col items-center justify-center text-slate-400 px-4 py-1.5 hover:text-purple-600 active:scale-90 transition-transform duration-150 no-underline">
+    <span class="material-symbols-outlined">explore</span>
+    <span class="font-['Plus_Jakarta_Sans'] text-[11px] font-semibold tracking-wide">Explore</span>
+  </a>
+  <a href="/saved" class="flex flex-col items-center justify-center text-purple-800 bg-purple-50 rounded-xl px-4 py-1.5 active:scale-90 transition-transform duration-150 no-underline">
+    <span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1;">bookmark</span>
+    <span class="font-['Plus_Jakarta_Sans'] text-[11px] font-semibold tracking-wide">Saved</span>
+  </a>
+  <a href="/profile" class="flex flex-col items-center justify-center text-slate-400 px-4 py-1.5 hover:text-purple-600 active:scale-90 transition-transform duration-150 no-underline">
+    <span class="material-symbols-outlined">person</span>
+    <span class="font-['Plus_Jakarta_Sans'] text-[11px] font-semibold tracking-wide">Profile</span>
+  </a>
+</nav>
+
+<script>
+  function toggleSave(btn) {
+    btn.classList.toggle('saved');
+    btn.classList.add('scale-90');
+    setTimeout(() => btn.classList.remove('scale-90'), 150);
+  }
+</script>
+
+</body>
+</html>
