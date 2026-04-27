@@ -56,17 +56,26 @@
   }
 </script>
 <style>
+  html { min-height: 100%; background: #fff7fd; }
   .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
   .map-gradient-overlay {
     background: linear-gradient(to bottom, rgba(255,247,253,0.9) 0%, rgba(255,247,253,0) 15%, rgba(255,247,253,0) 70%, rgba(255,247,253,0.9) 100%);
   }
-  body { min-height: max(884px, 100dvh); }
+  body {
+    min-height: 100svh;
+    min-height: 100dvh;
+    background: #fff7fd;
+  }
+  .app-shell {
+    height: 100svh;
+    height: 100dvh;
+  }
 </style>
 </head>
 <body class="bg-background text-on-background font-body-md overflow-hidden">
 
 <!-- TopAppBar -->
-<header class="fixed top-0 w-full z-50 bg-white/90 backdrop-blur-md border-b border-purple-100/20 shadow-[0_4px_20px_rgba(81,36,122,0.05)] flex justify-between items-center px-5 h-16">
+<header class="fixed top-0 w-full z-50 bg-white/92 border-b border-purple-100/40 shadow-[0_2px_12px_rgba(81,36,122,0.05)] flex justify-between items-center px-5 h-16">
   <div class="flex items-center gap-2">
     <span class="material-symbols-outlined text-purple-900">eco</span>
     <span class="font-['Plus_Jakarta_Sans'] font-extrabold text-xl italic tracking-tight text-purple-900">Extra Bite</span>
@@ -82,7 +91,7 @@
 </header>
 
 <!-- Main Canvas: Map View -->
-<main class="relative h-screen w-full pt-16 pb-20 overflow-hidden">
+<main class="app-shell relative w-full pt-16 pb-20 overflow-hidden">
   <!-- Background Map -->
   <div class="absolute inset-0 z-0">
     <img alt="Map of UQ St Lucia area" class="w-full h-full object-cover grayscale-[20%] contrast-[90%] brightness-[105%]" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBTzAnJTTG0XF_t-wavkkz30H1mGC7K3JxPGaGIb1UXwQ1CGxdsMmkMBwuiJkUrY2dhOQVVW4tgA6i_KmL1hVaITP4mXqKZVVpMSSiF9bD57HvIFD7VxpeQOTmzEaVks6GwrP-3TuXR7YyE48DZUz0027nS5Iwpam6jmq_TYOOxTPpHSl930AIbevA7OR_crdnSy4Dsy_Dza3zYyWeSIQ8KLr1vGPK5vyoN51aGhwG4c67lm024jeXR9vqiJE3Q_h4WK8EvWnzGAu6z"/>
@@ -90,12 +99,12 @@
   </div>
 
   <!-- Search Bar Overlay -->
-  <div class="absolute top-6 left-1/2 -translate-x-1/2 w-[90%] max-w-md z-10">
+  <div class="absolute top-5 left-1/2 -translate-x-1/2 w-[90%] max-w-sm z-10">
     <div class="relative">
       <div class="absolute inset-y-0 left-4 flex items-center pointer-events-none">
         <span class="material-symbols-outlined text-slate-400">search</span>
       </div>
-      <input class="w-full h-14 pl-12 pr-4 bg-white/95 backdrop-blur-md border-none rounded-full shadow-[0_8px_30px_rgb(81,36,122,0.12)] focus:ring-2 focus:ring-primary-container text-body-md font-label-bold transition-all" placeholder="Search UQ St Lucia..." type="text" value="UQ St Lucia, Union Complex"/>
+      <input class="w-full h-12 pl-12 pr-4 bg-white/96 border border-white/70 rounded-full shadow-[0_8px_24px_rgba(81,36,122,0.08)] focus:ring-2 focus:ring-primary-container text-body-md font-label-bold transition-all" placeholder="Search UQ St Lucia..." type="text" value="UQ St Lucia, Union Complex"/>
       <div class="absolute inset-y-0 right-4 flex items-center">
         <span class="material-symbols-outlined text-primary-container">tune</span>
       </div>
@@ -127,30 +136,30 @@
   </a>
 
   <!-- Featured Card -->
-  <div class="absolute bottom-6 left-0 w-full px-container-padding z-30">
-    <div class="bg-white/95 backdrop-blur-xl rounded-[24px] shadow-[0_20px_50px_rgba(81,36,122,0.15)] overflow-hidden flex flex-col md:flex-row max-w-lg mx-auto border border-white/50">
-      <div class="h-40 md:h-auto md:w-40 relative flex-shrink-0">
+  <div class="absolute bottom-5 left-0 w-full px-4 z-30">
+    <div class="bg-white/96 rounded-[22px] shadow-[0_14px_36px_rgba(81,36,122,0.12)] overflow-hidden flex flex-col max-w-[480px] mx-auto border border-white/70">
+      <div class="h-32 relative flex-shrink-0">
         <img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCRWoh9-RKEeGB214AyfXXsxQoFRBhftVN7KwmmHDPvo2hu_CaKcrjpwFJOT7Ede2r59HNpkbe63SDKr6GBeYhGc1abH4NBDeDzayNnrZTFgoOCaoWeiJRrfzx1J24hILm7V2ivcAwCiF1CLJkZcGf4YLlfvT7VuRT9IUV3lZGFAITstMRRLyfCu1YPRyIh1GuC5Iv1_g8oV6bEcrvEwwbmDEhgrLIbkyINlxICtJfgEd6AR0hia3a3E9cMSIlx20tX521N_WZgLJm0" alt="UQ Food Chains"/>
-        <div class="absolute top-3 left-3 bg-white/90 backdrop-blur-sm px-2 py-1 rounded-lg flex items-center gap-1 shadow-sm">
+        <div class="absolute top-3 left-3 bg-white/95 px-2 py-1 rounded-lg flex items-center gap-1 shadow-[0_2px_8px_rgba(0,0,0,0.08)]">
           <span class="material-symbols-outlined text-[14px] text-amber-500" style="font-variation-settings:'FILL' 1;">star</span>
           <span class="text-label-sm font-bold text-on-surface">4.8</span>
         </div>
       </div>
-      <div class="p-5 flex-grow">
-        <div class="flex justify-between items-start mb-1">
-          <h2 class="text-headline-md font-headline-md text-primary leading-tight">UQ Food Chains</h2>
-          <span class="text-label-sm font-label-bold text-on-secondary-container bg-secondary-container px-2 py-0.5 rounded-full">250m away</span>
+      <div class="p-4 flex-grow">
+        <div class="flex items-start justify-between gap-3 mb-1">
+          <h2 class="text-[18px] leading-tight font-['Plus_Jakarta_Sans'] font-bold text-primary">UQ Food Chains</h2>
+          <span class="shrink-0 text-[11px] font-label-bold text-on-secondary-container bg-secondary-container px-2 py-1 rounded-full">250m away</span>
         </div>
-        <p class="text-label-sm text-on-surface-variant flex items-center gap-1 mb-4">
-          <span class="material-symbols-outlined text-[16px]">location_on</span>
+        <p class="text-[13px] text-on-surface-variant flex items-center gap-1 mb-3">
+          <span class="material-symbols-outlined text-[15px]">location_on</span>
           Union Complex, St Lucia Campus
         </p>
-        <div class="flex items-center justify-between gap-4 pt-2">
+        <div class="flex items-center justify-between gap-3 pt-1">
           <div class="flex flex-col">
-            <span class="text-label-sm text-outline line-through">$18.50</span>
-            <span class="text-headline-md font-bold text-on-tertiary-container">$7.50</span>
+            <span class="text-[12px] text-outline line-through">$18.50</span>
+            <span class="text-[22px] leading-none font-bold text-on-tertiary-container">$7.50</span>
           </div>
-          <a href="/meal" class="bg-primary text-on-primary px-6 py-3 rounded-full font-label-bold shadow-lg shadow-primary/20 hover:scale-[1.02] active:scale-95 transition-all flex items-center gap-2 no-underline">
+          <a href="/meal" class="bg-primary text-on-primary px-5 py-2.5 rounded-full font-label-bold shadow-[0_8px_18px_rgba(57,6,99,0.18)] hover:scale-[1.01] active:scale-95 transition-all flex items-center gap-2 no-underline">
             Claim Bite
             <span class="material-symbols-outlined text-[18px]">bolt</span>
           </a>
@@ -161,7 +170,7 @@
 </main>
 
 <!-- BottomNavBar -->
-<nav class="fixed bottom-0 left-0 w-full h-20 bg-white/95 backdrop-blur-lg border-t border-purple-100 flex justify-around items-center px-4 shadow-[0_-4px_24px_rgba(81,36,122,0.08)] z-50" style="padding-bottom: env(safe-area-inset-bottom)">
+<nav class="fixed bottom-0 left-0 w-full h-20 bg-white/96 border-t border-purple-100 flex justify-around items-center px-4 shadow-[0_-2px_12px_rgba(81,36,122,0.06)] z-50" style="padding-bottom: env(safe-area-inset-bottom)">
   <a href="/explore" class="flex flex-col items-center justify-center text-purple-800 bg-purple-50 rounded-xl px-4 py-1.5 active:scale-90 transition-transform duration-150 no-underline">
     <span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1;">explore</span>
     <span class="font-['Plus_Jakarta_Sans'] text-[11px] font-semibold tracking-wide">Explore</span>
