@@ -267,6 +267,7 @@
   /* ── Location data ── */
   const locations = [
     {
+      slug:          'uq-food-chains',
       lat: -27.4975, lng: 153.0137,
       name:          'UQ Food Chains',
       address:       'Union Complex, Ground Floor, St Lucia',
@@ -277,6 +278,7 @@
       photo:         '/photos/pic-1.jpg',
     },
     {
+      slug:          'griffith-food-court',
       lat: -27.5687, lng: 153.0165,
       name:          'Griffith Food Court',
       address:       'Nathan Campus, Griffith University',
@@ -287,6 +289,7 @@
       photo:         '/photos/Griffifth university.jpg',
     },
     {
+      slug:          'qut-food-court',
       lat: -27.4769, lng: 153.0280,
       name:          'QUT Food Court',
       address:       'Gardens Point Campus, QUT, Brisbane',
@@ -297,6 +300,7 @@
       photo:         '/photos/QUT food court.jpg',
     },
     {
+      slug:          'brisbane-cbd-food-court',
       lat: -27.4671, lng: 153.0228,
       name:          'Brisbane CBD Food Court',
       address:       'Wintergarden, Queen St Mall, Brisbane',
@@ -332,6 +336,7 @@
     document.getElementById('card-address').textContent       = loc.address;
     document.getElementById('card-original-price').textContent = `$${loc.originalPrice.toFixed(2)}`;
     document.getElementById('card-price').textContent         = `$${loc.price.toFixed(2)}`;
+    document.querySelector('#location-card a[href="/meal"]').href = `/meal?location=${encodeURIComponent(loc.slug)}`;
     card.classList.remove('card-hidden');
     card.classList.add('card-visible');
   }

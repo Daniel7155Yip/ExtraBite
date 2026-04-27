@@ -214,5 +214,141 @@
   </a>
 </footer>
 
+<script>
+  const mealConfigs = {
+    'uq-food-chains': {
+      locationTitle: 'UQ Food Chains',
+      mealTitle: 'UQ Mystery Meal',
+      address: 'Union Complex, Ground Floor, St Lucia',
+      rating: '4.8',
+      reviews: '240 reviews',
+      remaining: '7 meals remaining',
+      claimed: '86% claimed',
+      progress: 86,
+      status: 'Hurry! The kitchen is closing soon.',
+      description: "A rotating mix from Guzman y Gomez, Subway, and Kenko Sushi. Expect burrito bowls, fresh sandwiches, and sushi packs bundled from the day's best surplus.",
+      gallery: ['/photos/gyg.jpg', '/photos/Subway.jpg', '/photos/kenko%20sushi.webp'],
+      galleryAlts: ['GYG meal option', 'Subway meal option', 'Kenko Sushi meal option'],
+      peekImage: '/photos/pic-1.jpg',
+      ctaPrice: '$5.00',
+      proportions: [
+        { label: 'GYG', pct: 45 },
+        { label: 'Subway', pct: 35 },
+        { label: 'Kenko Sushi', pct: 20 }
+      ]
+    },
+    'griffith-food-court': {
+      locationTitle: 'Griffith Food Court',
+      mealTitle: 'Nathan Campus Rescue Box',
+      address: 'Nathan Campus, Griffith University',
+      rating: '4.6',
+      reviews: '128 reviews',
+      remaining: '5 meals remaining',
+      claimed: '72% claimed',
+      progress: 72,
+      status: 'Best pickup window is before the dinner rush.',
+      description: 'A heartier campus pack with hot counter meals, sushi sides, and bakery extras from the Griffith precinct.',
+      gallery: ['/photos/Griffifth%20university.jpg', '/photos/gyg.jpg', '/photos/kenko%20sushi.webp'],
+      galleryAlts: ['Griffith Food Court interior', 'GYG meal option', 'Kenko Sushi meal option'],
+      peekImage: '/photos/Griffifth%20university.jpg',
+      ctaPrice: '$6.50',
+      proportions: [
+        { label: 'Campus Grill', pct: 50 },
+        { label: 'Sushi Counter', pct: 30 },
+        { label: 'Bakery Corner', pct: 20 }
+      ]
+    },
+    'qut-food-court': {
+      locationTitle: 'QUT Food Court',
+      mealTitle: 'Gardens Point Saver Pack',
+      address: 'Gardens Point Campus, QUT, Brisbane',
+      rating: '4.5',
+      reviews: '164 reviews',
+      remaining: '9 meals remaining',
+      claimed: '64% claimed',
+      progress: 64,
+      status: 'Most packs are claimed after 5:00 PM.',
+      description: 'A fast weekday pickup with wraps, sandwiches, hot-box meals, and snack add-ons from the QUT food hall.',
+      gallery: ['/photos/QUT%20food%20court.jpg', '/photos/Subway.jpg', '/photos/pic-1.jpg'],
+      galleryAlts: ['QUT Food Court interior', 'Subway meal option', 'Food court seating area'],
+      peekImage: '/photos/QUT%20food%20court.jpg',
+      ctaPrice: '$4.99',
+      proportions: [
+        { label: 'Sandwich Bar', pct: 40 },
+        { label: 'Hot Food Counter', pct: 40 },
+        { label: 'Snack Station', pct: 20 }
+      ]
+    },
+    'brisbane-cbd-food-court': {
+      locationTitle: 'Brisbane CBD Food Court',
+      mealTitle: 'City Lunch Rescue Pack',
+      address: 'Wintergarden, Queen St Mall, Brisbane',
+      rating: '4.7',
+      reviews: '203 reviews',
+      remaining: '6 meals remaining',
+      claimed: '79% claimed',
+      progress: 79,
+      status: 'Peak pickup is right after lunch service.',
+      description: 'A CBD lunch mix with sushi rolls, salads, hot meals, and premium office-lunch extras from the city food court.',
+      gallery: ['/photos/Brisbane%20CBD%20Food%20court.jpg', '/photos/kenko%20sushi.webp', '/photos/gyg.jpg'],
+      galleryAlts: ['Brisbane CBD Food Court interior', 'Kenko Sushi meal option', 'GYG meal option'],
+      peekImage: '/photos/Brisbane%20CBD%20Food%20court.jpg',
+      ctaPrice: '$5.25',
+      proportions: [
+        { label: 'City Kitchen', pct: 40 },
+        { label: 'Kenko Sushi', pct: 35 },
+        { label: 'Fresh Salads', pct: 25 }
+      ]
+    }
+  };
+
+  const params = new URLSearchParams(window.location.search);
+  const key = params.get('location') || 'uq-food-chains';
+  const config = mealConfigs[key] || mealConfigs['uq-food-chains'];
+
+  document.title = `Extra Bite - ${config.locationTitle}`;
+  document.querySelector('header h1').textContent = config.locationTitle;
+
+  const sections = document.querySelectorAll('main > section');
+  const galleryImages = sections[0].querySelectorAll('.snap-center img');
+  galleryImages.forEach((img, index) => {
+    img.src = config.gallery[index];
+    img.alt = config.galleryAlts[index];
+  });
+
+  const infoSection = sections[1];
+  infoSection.querySelector('h2').textContent = config.mealTitle;
+  infoSection.querySelector('p.text-label-sm').textContent = config.address;
+  infoSection.querySelector('.bg-tertiary-fixed .font-label-bold').textContent = config.rating;
+  infoSection.querySelector('a[href="/reviews"]').textContent = config.reviews;
+
+  const progressCard = infoSection.querySelector('.bg-surface-container-low');
+  const progressLabels = progressCard.querySelectorAll('.font-label-bold');
+  progressLabels[0].textContent = config.remaining;
+  progressLabels[1].textContent = config.claimed;
+  progressCard.querySelector('.bg-primary').style.width = `${config.progress}%`;
+  progressCard.querySelector('p.italic').textContent = config.status;
+
+  sections[2].querySelector('p').textContent = config.description;
+
+  const proportionBar = sections[3].querySelector('.shadow-inner');
+  proportionBar.children[0].style.width = `${config.proportions[0].pct}%`;
+  proportionBar.children[1].style.width = `${config.proportions[1].pct}%`;
+  proportionBar.children[2].style.width = `${config.proportions[2].pct}%`;
+
+  const proportionCards = sections[3].querySelectorAll('.grid > div');
+  proportionCards.forEach((card, index) => {
+    const spans = card.querySelectorAll('span');
+    spans[1].textContent = config.proportions[index].label;
+    spans[2].textContent = `${config.proportions[index].pct}%`;
+  });
+
+  sections[4].querySelector('img').src = config.peekImage;
+  sections[4].querySelector('img').alt = `${config.locationTitle} interior`;
+
+  const cta = document.querySelector('footer a');
+  cta.textContent = `Claim Mystery Meal for ${config.ctaPrice}`;
+</script>
+
 </body>
 </html>
