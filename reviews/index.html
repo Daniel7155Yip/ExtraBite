@@ -44,12 +44,20 @@
   }
 </script>
 <style>
+  html { min-height: 100%; background: #fff7fd; }
   .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
   .star-fill { font-variation-settings: 'FILL' 1; }
-  body { min-height: max(884px, 100dvh); }
+  body {
+    min-height: 100svh;
+    min-height: 100dvh;
+    background: #fff7fd;
+  }
+  .page-shell {
+    padding-bottom: calc(7rem + env(safe-area-inset-bottom));
+  }
 </style>
 </head>
-<body class="bg-background text-on-background min-h-screen pb-24">
+<body class="bg-background text-on-background">
 
 <!-- TopAppBar -->
 <header class="fixed top-0 w-full z-50 bg-white/90 backdrop-blur-md border-b border-purple-100/20 shadow-[0_4px_20px_rgba(81,36,122,0.05)] flex justify-between items-center px-5 h-16">
@@ -64,7 +72,7 @@
   </a>
 </header>
 
-<main class="pt-20 px-container-padding max-w-2xl mx-auto">
+<main class="page-shell pt-20 px-container-padding max-w-2xl mx-auto">
   <!-- Summary Header -->
   <section class="mt-base mb-lg">
     <h2 class="font-['Plus_Jakarta_Sans'] text-[24px] font-bold text-on-surface mb-md">Ratings &amp; Reviews</h2>
@@ -170,7 +178,7 @@
 </main>
 
 <!-- BottomNavBar -->
-<nav class="fixed bottom-0 left-0 w-full h-20 bg-white/95 backdrop-blur-lg border-t border-purple-100 shadow-[0_-4px_24px_rgba(81,36,122,0.08)] flex justify-around items-center px-4 z-50 rounded-t-2xl" style="padding-bottom: env(safe-area-inset-bottom)">
+<nav class="fixed bottom-0 left-0 w-full h-20 bg-white/95 backdrop-blur-lg border-t border-purple-100 shadow-[0_-4px_24px_rgba(81,36,122,0.08)] flex justify-around items-center px-4 z-50 rounded-t-2xl" style="padding-bottom: max(12px, env(safe-area-inset-bottom))">
   <a href="/explore" class="flex flex-col items-center justify-center text-slate-400 px-4 py-1.5 hover:text-purple-600 transition-transform duration-150 active:scale-90 no-underline">
     <span class="material-symbols-outlined">explore</span>
     <span class="font-['Plus_Jakarta_Sans'] text-[11px] font-semibold tracking-wide">Explore</span>

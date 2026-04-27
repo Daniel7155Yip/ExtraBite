@@ -56,13 +56,21 @@
   }
 </script>
 <style>
+  html { min-height: 100%; background: #fff7fd; }
   .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
   .progress-sparkle { background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent); background-size: 200% 100%; }
   .ambient-shadow { box-shadow: 0 4px 20px rgba(81,36,122,0.08); }
-  body { min-height: max(884px, 100dvh); }
+  body {
+    min-height: 100svh;
+    min-height: 100dvh;
+    background: #fff7fd;
+  }
+  .page-shell {
+    padding-bottom: calc(7rem + env(safe-area-inset-bottom));
+  }
 </style>
 </head>
-<body class="bg-background text-on-background font-body-md min-h-screen pb-32">
+<body class="bg-background text-on-background font-body-md">
 
 <!-- Top AppBar -->
 <header class="fixed top-0 w-full z-50 bg-white/90 backdrop-blur-md border-b border-purple-100/20 shadow-[0_4px_20px_rgba(81,36,122,0.05)]">
@@ -77,7 +85,7 @@
   </div>
 </header>
 
-<main class="pt-24 px-container-padding max-w-2xl mx-auto">
+<main class="page-shell pt-24 px-container-padding max-w-2xl mx-auto">
   <!-- Profile Header -->
   <section class="flex flex-col items-center mb-8">
     <h1 class="font-headline-lg text-headline-lg text-on-surface mb-1">Julianne Vibe</h1>
@@ -171,7 +179,7 @@
 </main>
 
 <!-- Bottom Navigation Bar -->
-<nav class="fixed bottom-0 left-0 w-full h-20 bg-white/95 backdrop-blur-lg border-t border-purple-100 shadow-[0_-4px_24px_rgba(81,36,122,0.08)] flex justify-around items-center px-4 z-50 rounded-t-2xl" style="padding-bottom: env(safe-area-inset-bottom)">
+<nav class="fixed bottom-0 left-0 w-full h-20 bg-white/95 backdrop-blur-lg border-t border-purple-100 shadow-[0_-4px_24px_rgba(81,36,122,0.08)] flex justify-around items-center px-4 z-50 rounded-t-2xl" style="padding-bottom: max(12px, env(safe-area-inset-bottom))">
   <a href="/explore" class="flex flex-col items-center justify-center text-slate-400 px-4 py-1.5 hover:text-purple-600 active:scale-90 transition-transform duration-150 no-underline">
     <span class="material-symbols-outlined mb-1">explore</span>
     <span class="font-['Plus_Jakarta_Sans'] text-[11px] font-semibold tracking-wide">Explore</span>

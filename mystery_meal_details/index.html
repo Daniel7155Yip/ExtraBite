@@ -56,10 +56,18 @@
   }
 </script>
 <style>
+  html { min-height: 100%; background: #fff7fd; }
   .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
   .hide-scrollbar::-webkit-scrollbar { display: none; }
   .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-  body { min-height: max(884px, 100dvh); }
+  body {
+    min-height: 100svh;
+    min-height: 100dvh;
+    background: #fff7fd;
+  }
+  .page-shell {
+    padding-bottom: calc(7.5rem + env(safe-area-inset-bottom));
+  }
 </style>
 </head>
 <body class="bg-surface-bright text-on-background font-body-md">
@@ -80,7 +88,7 @@
   </div>
 </header>
 
-<main class="pt-16 pb-28">
+<main class="page-shell pt-16 pb-28">
   <!-- Photo Gallery -->
   <section class="relative">
     <div class="flex overflow-x-auto hide-scrollbar snap-x snap-mandatory gap-2 px-5 py-4">
